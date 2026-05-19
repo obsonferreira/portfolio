@@ -10,9 +10,10 @@ Comecei a estudar de forma autodidata JS e na curiosidade fui pesquisar como a R
 
 
 1. Instalar o Node.js (se não tiver).
-2. `cd cli` (para navegar até a pasta do projeto).
-3. `npm install readline-sync ` (instale a biblioteca para conseguir usar o teclado para digitar no terminal).
-4. `node cpfTools.js` (executa o menu CPF no terminal).
+2. Baixe o repositório: `git clone https://github.com/obsonferreira/portfolio.git`
+3. `cd portfolio-main/cli` (para navegar até a pasta do projeto).
+4. `npm install readline-sync ` (instale a biblioteca para conseguir usar o teclado para digitar no terminal).
+5. `node cpfTools.js` (executa o menu CPF no terminal).
 - Menu simples com 3 opções: 1. gera cpf aleatório, 2. valida um cpf digitado e 3 finaliza a execução.
 5. `node senhaUtils.js` (aqui o node executa o arquivo "senhaUtils.js" no terminal).
 - Um capo onde você escolhe a quantidade de digitos da senha min. 4 digitos.

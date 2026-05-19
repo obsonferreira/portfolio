@@ -17,7 +17,7 @@ No output troquei `console.log` por `innerHTML`.
 
 ### Opção 2: Rodar local no seu PC
 1. Baixe o repositório: `git clone https://github.com/obsonferreira/portfolio.git`
-2. Entre na pasta: `cd portfolio-main/web`
+2. Entre na pasta: `cd portfolio-main/js-cpf-senha-tools/web`
 3. Abra o arquivo `index.html` no navegador
    - Windows: duplo clique no arquivo
    - Ou arrasta o `index.html` pra dentro do Chrome

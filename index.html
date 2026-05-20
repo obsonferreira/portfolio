@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obson Ferreira - Projetos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 48px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: #f0f6fc;
+        }
+
+        .subtitle {
+            color: #7d8590;
+            font-size: 16px;
+        }
+
+        .projeto {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .projeto:hover {
+            border-color: #58a6ff;
+        }
+
+        .projeto h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #f0f6fc;
+        }
+
+        .projeto p {
+            color: #7d8590;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #21262d;
+            color: #58a6ff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid #30363d;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #238636;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #2ea043;
+        }
+
+        footer {
+            margin-top: 48px;
+            text-align: center;
+            color: #7d8590;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Obson Ferreira</h1>
+            <p class="subtitle">Dev Back-end em formação | Projetos de estudo</p>
+        </header>
+
+        <div class="projeto">
+            <h2>BuscaCEP</h2>
+            <div class="tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">API REST</span>
+                <span class="tag">ViaCEP</span>
+            </div>
+            <p>Interface web que consome API pública pra buscar endereços por CEP. Foco em entender status codes e
+                tratamento de erros HTTP.</p>
+            <a href="./js-api-busca-cep/" class="btn">Abrir projeto →</a>
+        </div>
+
+        <div class="projeto">
+            <h2>Validador CPF</h2>
+            <div class="tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Validação</span>
+                <span class="tag">Algoritmo</span>
+            </div>
+            <p>Ferramenta pra validar e gerar CPF com algoritmo de dígito verificador. Prática de lógica e regex.</p>
+            <a href="./js-cpf-senha-tools/web/" class="btn">Abrir projeto →</a>
+        </div>
+
+        <footer>
+            <a href="https://github.com/obsonferreira" target="_blank">GitHub</a> •
+            <a href="https://linkedin.com/in/seu-link" target="_blank">LinkedIn</a>
+        </footer>
+    </div>
+</body>
+
+</html>

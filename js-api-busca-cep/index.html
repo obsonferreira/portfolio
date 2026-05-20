@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>API busca Cep</title>
+</head>
+
+<body class="input-cep">
+
+    <div id="home">
+        <div>
+
+            <span>
+                <h1>Busca cep </h1>
+                <hr>
+            </span>
+
+        </div>
+        <div class="input-busca-cep">
+
+            <div class="linha-busca">
+                <input id="input-cep" type="text" placeholder="Digite aqui o cep">
+                <button id="buscar-cep">Buscar cep</button>
+            </div>
+            <div id="alerta">
+                <span id="cep-alerta" class="alerta-mensagem" hidden> </span>
+            </div>
+        </div>
+
+        <div id="loader" class="spinner" hidden></div>
+
+        <div id="div-formulario-cep" class="formulario" hidden>
+            <hr>
+            <form id="formulario-cep">
+                <div>
+                    <label for="logradouro">Logradouro/Endereço :</label>
+                    <input type="text" name="logradouro" id="endereco-form" autocomplete="address-line1">
+                </div>
+
+                <div>
+                    <label for="numero">Número: </label>
+                    <input type="text" name="numero" id="numero-form" autocomplete="address-line2">
+                </div>
+
+                <div>
+                    <label for="complemento">Complemento</label>
+                    <input type="text" name="complemento" id="complemento-form" autocomplete="address-line3">
+                </div>
+
+                <div>
+                    <label for="bairro">Bairro</label>
+                    <input type="text" name="bairro" id="bairro-form" autocomplete="address-level3">
+                </div>
+
+                <div>
+                    <label for="localidade">Cidade</label>
+                    <input type="text" name="localidade" id="cidade-form" autocomplete="address-level2">
+                </div>
+
+                <div>
+                    <label for="estado">Estado</label>
+                    <input type="text" name="estado" id="estado-form" autocomplete="address-level1">
+                </div>
+
+                <div>
+                    <label for="uf">UF</label>
+                    <input type="text" name="uf" id="uf-form" autocomplete="address-level1">
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+
+    <script src="./apiCep.js"></script>
+
+</body>
+
+</html>

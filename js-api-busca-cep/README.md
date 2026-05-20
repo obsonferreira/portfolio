@@ -9,7 +9,7 @@
 
 ## Print
 
-<img src="CAMINHO_CORRETO_DO_GIF_CEP.gif" width="600" alt="Demo buscando CEP">
+<img src="https://github.com/obsonferreira/portfolio/blob/main/js-api-busca-cep/demo-apiCep.gif" width="600" alt="Demo buscando CEP">
 
 ## Por que fiz
 

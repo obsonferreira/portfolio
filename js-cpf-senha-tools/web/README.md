@@ -32,7 +32,7 @@ Não precisa de Node, não precisa de servidor. É HTML + JS puro rodando direto
 - Gera CPF válido aleatório (`Lembrando que válido não significa que ele faz parte do banco de dados da receita ou pertence a uma pessoa`).
 - Valida CPF digitado: formatos aceitos `123.456.789-09 `, `12345678909`.
 - Bloqueia CPF com dígitos repetidos, ex.:(`111.111.111-11`).
-- Valida tamanho: avisa se digitou menos de 11 números (`Lembrando que letras não contabilizados como digitos válidos`).
+- Valida tamanho: avisa se digitou menos de 11 números (`Letras não são contabilizadas como dígitos válidos`).
 
 **Módulo Senha - `senhaUtils.js`**
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Lista de Contato</title>
+    <script type="module" src="../../controles/dadosTools.js"></script>
+</head>
+
+<body>
+
+    <div class="menu-index">
+        <span>Menu</span>
+        <menu type="toolbar" class="opcao-menu">
+
+            <div><a href="../index.html">Home</a></div>
+            <div><a href="./contato.html">Cadastrar contato</a></div>
+
+        </menu>
+    </div>
+
+    <div id="busca-contato">
+
+        <input id="input-busca" placeholder="digite os dados para busca">
+        <button id="botao-busca">Buscar</button>
+
+    </div>
+
+    <div>
+
+        <span id="quantidade-contatos"></span>
+
+    </div>
+
+    <div id="tabela-container" class="lista-contato">
+        <table id="tabela-contato">
+            <thead>
+
+                <th>  #  </th>
+                <th> Nome </th>
+                <th> Sobrenome </th>
+                <th> Telefone </th>
+                <th> Email </th>
+
+            </thead>
+
+        </table>
+
+    </div>
+    
+    <div>
+        <span id="sem-contato" hidden></span>
+
+    </div>
+
+</body>
+
+</html>

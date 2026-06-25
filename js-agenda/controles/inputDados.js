@@ -25,13 +25,13 @@ const botaoInput = document.getElementById('botao-formulario');
 
 if (editar) {
 
-    botaoInput.textContent = 'Salvar';
+    botaoInput.textContent = 'Salvar alteração';
 } else if (excluir) {
 
     botaoInput.textContent = 'Excluir';
 
 } else {
-    botaoInput.textContent = "Salvar contato";
+    botaoInput.textContent = "Novo contato";
 };
 
 formulario.addEventListener('submit', (event) => {

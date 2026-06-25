@@ -77,16 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-botaoBusca.addEventListener('click', () =>{
+botaoBusca.addEventListener('click', () => {
     const input = inputBusca.value;
     if (input.length <= 0) {
         const spanBusca = document.createElement('span');
         spanBusca.innerHTML = 'Campo não pode ser vázio!';
         divBusca.appendChild(spanBusca);
-        
-    }else{
-        
+
+    } else {
+
         const resultado = buscaContato(input);
-        
+
     };
 });

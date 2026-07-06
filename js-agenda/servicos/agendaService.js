@@ -5,6 +5,7 @@ import { Contato } from "../modelos/contato.js";
 import { Pessoa } from "../modelos/pessoa.js";
 
 export function criarPessoa(dadosObjeto) {
+
     const contato = new Contato(dadosObjeto.telefone, dadosObjeto.email);
     const pessoa = new Pessoa(dadosObjeto.nome, dadosObjeto.sobrenome, contato);
 

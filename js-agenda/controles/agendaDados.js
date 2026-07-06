@@ -1,16 +1,27 @@
-import { Pessoa } from "../modelos/pessoa.js";
-import { buscaContato, retornaLista } from "../repositorio/agendaRepositorio.js";
-import { verificaInput } from "../repositorio/ferramentas.js";
+// import { Pessoa } from "../modelos/pessoa.js";
+import { buscaContato, retornaLista, editarContato, deletarContato } from "../repositorio/agendaRepositorio.js";
+import { criarPessoa } from "../servicos/agendaService.js";
+import { validaPessoa } from "../validadores/validaPessoa.js";
 
 const spanContato = document.getElementById('quantidade-contatos');
 const spanSemContato = document.getElementById('sem-contato');
 const divBusca = document.getElementById('busca-contato');
 const inputBusca = document.getElementById('input-busca');
 const botaoBusca = document.getElementById('botao-busca');
+const modal = document.getElementById('modal-contato');
+
+const formulario = document.getElementById('formulario-modal');
+const alertaNome = document.getElementById('alerta-nome');
+const alertaSobrenome = document.getElementById('alerta-sobrenome');
+const alertaTelefone = document.getElementById('alerta-telefone');
+const alertaEmail = document.getElementById('alerta-email');
+const spanAlerta = document.getElementById('span-alerta');
+const botaoEditarForm = document.getElementById('editar-form');
+const botaoExcluir = document.getElementById('excluir-form');
 
 const lista = retornaLista();
-
 const tabela = document.getElementById('tabela-contato');
+let referencia;
 
 document.addEventListener('DOMContentLoaded', () => {
     const corpo = document.createElement('tbody');
@@ -55,25 +66,95 @@ document.addEventListener('DOMContentLoaded', () => {
                 valorLinha.appendChild(tdEmail);
 
             });
-            const urlEditar = `./contato.html?editar=${pessoa.id}`;
-            const tdEditar = document.createElement('a');
+
+            const tdEditar = document.createElement('button');
+            tdEditar.classList.add('btn-editar');
             tdEditar.textContent = 'Editar';
-            tdEditar.href = urlEditar;
+            tdEditar.dataset.pessoa = pessoa.id;
+
             valorLinha.appendChild(tdEditar);
-
-            const urlExcluir = `./contato.html?excluir=${pessoa.id}`;
-            const tdExcluir = document.createElement('a');
-            tdExcluir.textContent = 'Excluir';
-            tdExcluir.href = urlExcluir;
-            valorLinha.appendChild(tdExcluir);
-
             corpo.appendChild(valorLinha);
-
         });
-
         tabela.appendChild(corpo);
+
+
+    };
+});
+
+
+tabela.addEventListener('click', (event) => {
+    event.preventDefault();
+    const dadosBusca = event.target.getAttribute('data-pessoa');
+    const dados = buscaContato(parseInt(dadosBusca));
+    referencia = parseInt(dadosBusca);
+    for (const chave in dados) {
+
+        if (formulario.elements[chave]) {
+
+            formulario.elements[chave].value = dados[chave];
+
+        };
+        if (chave === "contato") {
+
+            for (const contato in dados.contato) {
+
+                if (formulario.elements[contato]) {
+                    formulario.elements[contato].value = dados.contato[contato];
+                };
+            };
+        };
+    };
+    modal.showModal();
+
+});
+
+formulario.addEventListener('submit', (event) => {
+
+    event.preventDefault();
+
+    alertaNome.setAttribute('hidden', "");
+    alertaSobrenome.setAttribute('hidden', "");
+    alertaTelefone.setAttribute('hidden', "");
+    alertaEmail.setAttribute('hidden', "");
+
+    const formData = new FormData(formulario);
+    const dadosObjeto = Object.fromEntries(formData.entries());
+    const pessoa = criarPessoa(dadosObjeto);
+    const validacao = validaPessoa(pessoa);
+
+    editarContato(pessoa, validacao, referencia);
+
+    if (validacao.nome.erro) {
+        alertaNome.removeAttribute('hidden');
+        alertaNome.innerHTML = validacao.nome.mensagem;
     };
 
+    if (validacao.sobrenome.erro) {
+        alertaSobrenome.removeAttribute('hidden');
+        alertaSobrenome.innerHTML = validacao.sobrenome.mensagem;
+    };
+
+    if (validacao.telefone.erro) {
+        alertaTelefone.removeAttribute('hidden');
+        alertaTelefone.innerHTML = validacao.telefone.mensagem;
+    };
+
+    if (validacao.email.erro) {
+        alertaEmail.removeAttribute('hidden');
+        alertaEmail.innerHTML = validacao.email.mensagem;
+    };
+    if (validacao.contatoValido) {
+        location.reload();
+        modal.close();
+
+    };
+});
+
+botaoExcluir.addEventListener('click', () => {
+
+    deletarContato(referencia);
+    location.reload();
+    modal.close();
 
 });
 
@@ -90,3 +171,5 @@ botaoBusca.addEventListener('click', () => {
 
     };
 });
+
+

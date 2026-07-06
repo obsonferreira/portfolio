@@ -11,28 +11,6 @@ const spanAlerta = document.getElementById('span-alerta');
 const parametro = new URLSearchParams(window.location.search);
 const editar = parametro.has('editar');
 const excluir = parametro.has('excluir');
-const acao = editar || excluir;
-let referencia = 0;
-if (editar) {
-
-    referencia = parseInt(parametro.get('editar'));
-} else if (excluir) {
-
-    referencia = parseInt(parametro.get('excluir'));
-};
-
-const botaoInput = document.getElementById('botao-formulario');
-
-if (editar) {
-
-    botaoInput.textContent = 'Salvar alteração';
-} else if (excluir) {
-
-    botaoInput.textContent = 'Excluir';
-
-} else {
-    botaoInput.textContent = "Novo contato";
-};
 
 formulario.addEventListener('submit', (event) => {
 
@@ -48,16 +26,7 @@ formulario.addEventListener('submit', (event) => {
     const pessoa = criarPessoa(dadosObjeto);
     const validacao = validaPessoa(pessoa);
 
-    if (editar) {
-
-        editarContato(pessoa, validacao, referencia);
-    } else if (excluir) {
-
-        deletarContato(referencia);
-    } else {
-
-        salvarContato(pessoa, validacao);
-    };
+    salvarContato(pessoa, validacao);
 
     if (validacao.nome.erro) {
         alertaNome.removeAttribute('hidden');
@@ -81,42 +50,6 @@ formulario.addEventListener('submit', (event) => {
 
     formulario.reset();
 });
-
-if (acao) {
-
-    const dados = buscaContato(referencia);
-
-    if (dados.erro) {
-        
-        formulario.setAttribute("hidden","");
-        spanAlerta.removeAttribute('hidden');
-        spanAlerta.innerHTML = dados.erro;
-
-    } else {
-        document.addEventListener('DOMContentLoaded', () => {
-            for (const chave in dados) {
-
-                if (formulario.elements[chave]) {
-
-                    formulario.elements[chave].value = dados[chave];
-
-                };
-                if (chave === "contato") {
-
-                    for (const contato in dados.contato) {
-
-                        if (formulario.elements[contato]) {
-                            formulario.elements[contato].value = dados.contato[contato];
-                        };
-                    };
-                };
-            };
-        });
-
-    };
-
-};
-
 
 
 

@@ -21,14 +21,13 @@
         </menu>
     </div>
 
-    <div id="busca-contato">
+    <div id="dados-container">
+        <div id="busca-contato">
 
-        <input id="input-busca" placeholder="digite os dados para busca">
-        <button id="botao-busca">Buscar</button>
+            <input id="input-busca" placeholder="digite os dados para busca">
+            <button id="botao-busca">Buscar</button>
 
-    </div>
-
-    <div>
+        </div>
 
         <span id="quantidade-contatos"></span>
 
@@ -38,7 +37,7 @@
         <table id="tabela-contato">
             <thead>
 
-                <th>  #  </th>
+                <th> # </th>
                 <th> Nome </th>
                 <th> Sobrenome </th>
                 <th> Telefone </th>
@@ -47,13 +46,53 @@
             </thead>
 
         </table>
+        <div>
+            <span id="sem-contato" hidden></span>
 
+        </div>
     </div>
-    
-    <div>
-        <span id="sem-contato" hidden></span>
+   
+    <dialog id="modal-contato">
+                <form id="formulario-modal">
+                    <div id="dados-pessoais">
+                        <div id="campo-nome">
+                            <label for="nome">Nome</label>
+                            <input id="nome" name="nome" type="text" placeholder="Digite o nome do contato">
+                            <span id="alerta-nome" hidden></span>
+                        </div>
+                
+                        <div id="campo-sobrenome">
+                            <label for="sobrenome">Sobrenome</label>
+                            <input id="sobrenome" name="sobrenome" type="text" placeholder="Digite o sobrenome do contato">
+                            <span id="alerta-sobrenome" hidden></span>
+                        </div>
+                
+                    </div>
+                
+                    <div id="telefone">
+                
+                        <label for="telefone">Telefone</label>
+                        <input id="telefone" name="telefone" type="text" placeholder="Digite o telefone">
+                        <span id="alerta-telefone" hidden></span>
+                
+                    </div>
+                
+                    <div id="email">
+                
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="text" placeholder="Digite o email contato">
+                        <span id="alerta-email" hidden></span>
+                
+                    </div>
+                    <div id="botao-form">
+                        <button id="editar-form" type="submit">Editar</button>
+                        
+                    </div>
+                
+                </form>
+                <button id="excluir-form" type="submit">Excluir</button>
+    </dialog>
 
-    </div>
 
 </body>
 

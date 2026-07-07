@@ -1,4 +1,6 @@
-export function validaContato(validacao) {
+import { buscaContato } from "../repositorio/agendaRepositorio.js";
+
+function validaContato(validacao) {
     let contaErros = 0;
     let dados = Object.values(validacao);
 
@@ -19,11 +21,14 @@ export function validaContato(validacao) {
 
 export function validaPessoa(pessoa) {
     const validacao = {};
-
+    const contatoExistente = verificaDuplicidade(pessoa);
     validacao.nome = pessoa.validarNome();
     validacao.telefone = pessoa.contato.validarTelefone();
     validacao.email = pessoa.contato.validarEmail();
-    let teste = pessoa.sobrenome.length;
+    validacao.emailExistente = contatoExistente.emailExistente;
+    validacao.telefoneExistente = contatoExistente.telefoneExistente;
+    console.log(contatoExistente);
+    console.log(validacao);
 
     if (pessoa.sobrenome.length > 0) {
 
@@ -39,3 +44,31 @@ export function validaPessoa(pessoa) {
     return validacao;
 
 };
+
+function verificaDuplicidade(pessoa) {
+    const resultado = {};
+    const resultadoTelefone = buscaContato(pessoa.contato.telefone);
+    const resultadoEmail = buscaContato(pessoa.contato.email);
+
+    if (!resultadoTelefone.erro) {
+        const verificaTelefone = resultadoTelefone.contato.telefone === pessoa.contato.telefone;
+        if (verificaTelefone) {
+
+            resultado.telefoneExistente = { erro: true, mensagem: `Telefone pertece ao contato: ${resultadoTelefone.nome}  ${resultadoTelefone.sobrenome}` };
+        };
+    } else {
+        resultado.telefoneExistente = { erro: false };
+    };
+
+    if (!resultadoEmail.erro) {
+        const verificaEmail = resultadoEmail.contato.email === pessoa.contato.email;
+        if (verificaEmail) {
+
+            resultado.emailExistente = { erro: true, mensagem: `Email pertece ao contato: ${resultadoEmail.nome} ${resultadoEmail.sobrenome}` };
+        };
+    } else {
+        resultado.emailExistente = { erro: false };
+    };
+
+    return resultado;
+}

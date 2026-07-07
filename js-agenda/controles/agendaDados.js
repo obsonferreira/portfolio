@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 tabela.addEventListener('click', (event) => {
     event.preventDefault();
+
     const dadosBusca = event.target.getAttribute('data-pessoa');
     const dados = buscaContato(parseInt(dadosBusca));
     referencia = parseInt(dadosBusca);
@@ -164,7 +165,7 @@ botaoExcluir.addEventListener('click', () => {
 botaoSair.addEventListener('click', () => {
 
     modalContato.close();
-    
+
 });
 
 botaoSim.addEventListener('click', () => { 
@@ -189,6 +190,7 @@ botaoBusca.addEventListener('click', () => {
     } else {
 
         const resultado = buscaContato(input);
+        
 
     };
 });

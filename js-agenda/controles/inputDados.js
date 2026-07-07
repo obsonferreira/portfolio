@@ -10,6 +10,7 @@ const alertaEmail = document.getElementById('alerta-email');
 const spanAlerta = document.getElementById('span-alerta');
 const modal = document.getElementById('modal-contato-salvo');
 const botaoFechar = document.getElementById('fechar-mensagem');
+const alertaCadastro = document.getElementById('alerta-cadasatro');
 
 formulario.addEventListener('submit', (event) => {
 
@@ -23,7 +24,7 @@ formulario.addEventListener('submit', (event) => {
     const dadosObjeto = Object.fromEntries(formData.entries());
     const pessoa = criarPessoa(dadosObjeto);
     const validacao = validaPessoa(pessoa);
-
+    
     if (validacao.nome.erro) {
         alertaNome.removeAttribute('hidden');
         alertaNome.innerHTML = validacao.nome.mensagem;
@@ -43,8 +44,21 @@ formulario.addEventListener('submit', (event) => {
         alertaEmail.removeAttribute('hidden');
         alertaEmail.innerHTML = validacao.email.mensagem;
     };
+
+    if (validacao.emailExistente.erro) {
+        modal.showModal();
+        alertaCadastro.innerHTML = validacao.emailExistente.mensagem
+
+    };
+    if (validacao.telefoneExistente.erro) {
+        modal.showModal();
+        alertaCadastro.innerHTML = validacao.telefoneExistente.mensagem
+
+    };
+
     if (validacao.contatoValido) {
         modal.showModal();
+        alertaCadastro.innerHTML = 'Contato criado com sucesso!'
         salvarContato(pessoa, validacao);
 
     };

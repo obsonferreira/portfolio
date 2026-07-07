@@ -35,7 +35,7 @@ export function buscaContato(input) {
     let idContato = retronaId(input, retornaLista());
     
     if (idContato.erro) {
-        return { erro: idContato.erro };
+        return { erro: true, mensagem: idContato.erro };
     };
 
     let dadoBusca = agendaRepositorio.buscar(idContato);

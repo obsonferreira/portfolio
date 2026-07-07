@@ -37,11 +37,11 @@ export function verificaInput(inputUser) {
 };
 
 export function retronaId(input, lista) {
-
+    
     const buscar = verificaInput(input.toString());
     let idContato;
     if (buscar.numero) {
-        idContato = lista.find(usuario => usuario.telefone === input)
+        idContato = lista.find(usuario => usuario.contato.telefone === input)
         if (!idContato) {
             idContato = lista.find(usuario => usuario.id === input)
         };
@@ -53,7 +53,7 @@ export function retronaId(input, lista) {
         };
 
     } else if (buscar.email) {
-        idContato = lista.find(usuario => usuario.email === input)
+        idContato = lista.find(usuario => usuario.contato.email === input)
     }
 
     if (!idContato) {

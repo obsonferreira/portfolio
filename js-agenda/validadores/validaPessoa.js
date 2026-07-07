@@ -27,8 +27,6 @@ export function validaPessoa(pessoa) {
     validacao.email = pessoa.contato.validarEmail();
     validacao.emailExistente = contatoExistente.emailExistente;
     validacao.telefoneExistente = contatoExistente.telefoneExistente;
-    console.log(contatoExistente);
-    console.log(validacao);
 
     if (pessoa.sobrenome.length > 0) {
 

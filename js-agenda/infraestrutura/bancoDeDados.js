@@ -1,4 +1,3 @@
-import { log } from "node:console";
 import sqlite3 from "sqlite3";
 
 export class Banco {
@@ -26,7 +25,7 @@ export class Banco {
           CONSTRAINT fk_pessoas_contatos FOREIGN KEY (pessoa_id) REFERENCES pessoas(id_pessoa))
       `);
     });
-    console.log("Tabela criada ou já existente.");
+    
 
   };
 
@@ -34,9 +33,9 @@ export class Banco {
 
     this.banco.close((erro) => {
       if (erro) {
-        console.error("Erro ao fechar a conexão:", erro.message);
+        
       }
-      console.log("Conexão fechada.");
+      
     });
 
   };

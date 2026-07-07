@@ -8,7 +8,8 @@ const spanSemContato = document.getElementById('sem-contato');
 const divBusca = document.getElementById('busca-contato');
 const inputBusca = document.getElementById('input-busca');
 const botaoBusca = document.getElementById('botao-busca');
-const modal = document.getElementById('modal-contato');
+const modalContato = document.getElementById('modal-contato');
+const modalExclusao = document.getElementById('modal-exclusao')
 
 const formulario = document.getElementById('formulario-modal');
 const alertaNome = document.getElementById('alerta-nome');
@@ -17,7 +18,10 @@ const alertaTelefone = document.getElementById('alerta-telefone');
 const alertaEmail = document.getElementById('alerta-email');
 const spanAlerta = document.getElementById('span-alerta');
 const botaoEditarForm = document.getElementById('editar-form');
-const botaoExcluir = document.getElementById('excluir-form');
+const botaoExcluir = document.getElementById('btn-excluir');
+const botaoSair = document.getElementById('btn-sair');
+const botaoSim = document.getElementById('btn-sim');
+const botaoNao = document.getElementById('btn-nao');
 
 const lista = retornaLista();
 const tabela = document.getElementById('tabela-contato');
@@ -104,7 +108,7 @@ tabela.addEventListener('click', (event) => {
             };
         };
     };
-    modal.showModal();
+    modalContato.showModal();
 
 });
 
@@ -145,16 +149,33 @@ formulario.addEventListener('submit', (event) => {
     };
     if (validacao.contatoValido) {
         location.reload();
-        modal.close();
+        modalContato.close();
 
     };
 });
 
 botaoExcluir.addEventListener('click', () => {
 
+    modalContato.close();
+    modalExclusao.showModal();
+
+});
+
+botaoSair.addEventListener('click', () => {
+
+    modalContato.close();
+    
+});
+
+botaoSim.addEventListener('click', () => { 
     deletarContato(referencia);
     location.reload();
-    modal.close();
+});
+
+botaoNao.addEventListener('click', () => { 
+
+    modalContato.showModal();
+    modalExclusao.close();
 
 });
 

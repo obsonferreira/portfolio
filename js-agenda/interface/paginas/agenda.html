@@ -51,47 +51,58 @@
 
         </div>
     </div>
-   
-    <dialog id="modal-contato">
-                <form id="formulario-modal">
-                    <div id="dados-pessoais">
-                        <div id="campo-nome">
-                            <label for="nome">Nome</label>
-                            <input id="nome" name="nome" type="text" placeholder="Digite o nome do contato">
-                            <span id="alerta-nome" hidden></span>
-                        </div>
-                
-                        <div id="campo-sobrenome">
-                            <label for="sobrenome">Sobrenome</label>
-                            <input id="sobrenome" name="sobrenome" type="text" placeholder="Digite o sobrenome do contato">
-                            <span id="alerta-sobrenome" hidden></span>
-                        </div>
-                
+    <div class="dialog">
+        <dialog id="modal-contato">
+            <form id="formulario-modal">
+                <div id="dados-pessoais">
+                    <div id="campo-nome">
+                        <label for="nome">Nome</label>
+                        <input id="nome" name="nome" type="text" placeholder="Digite o nome do contato">
+                        <span id="alerta-nome" hidden></span>
                     </div>
-                
-                    <div id="telefone">
-                
-                        <label for="telefone">Telefone</label>
-                        <input id="telefone" name="telefone" type="text" placeholder="Digite o telefone">
-                        <span id="alerta-telefone" hidden></span>
-                
+
+                    <div id="campo-sobrenome">
+                        <label for="sobrenome">Sobrenome</label>
+                        <input id="sobrenome" name="sobrenome" type="text" placeholder="Digite o sobrenome do contato">
+                        <span id="alerta-sobrenome" hidden></span>
                     </div>
-                
-                    <div id="email">
-                
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="text" placeholder="Digite o email contato">
-                        <span id="alerta-email" hidden></span>
-                
-                    </div>
-                    <div id="botao-form">
-                        <button id="editar-form" type="submit">Editar</button>
-                        
-                    </div>
-                
-                </form>
-                <button id="excluir-form" type="submit">Excluir</button>
-    </dialog>
+
+                </div>
+
+                <div id="telefone">
+
+                    <label for="telefone">Telefone</label>
+                    <input id="telefone" name="telefone" type="text" placeholder="Digite o telefone">
+                    <span id="alerta-telefone" hidden></span>
+
+                </div>
+
+                <div id="email">
+
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="text" placeholder="Digite o email contato">
+                    <span id="alerta-email" hidden></span>
+
+                </div>
+                <div id="botao-form">
+                    <button id="editar-form" type="submit">Editar</button>
+
+                </div>
+
+            </form>
+            <button id="btn-excluir" type="submit">Excluir</button>
+            <button id="btn-sair" type="submit">Sair</button>
+        </dialog>
+
+        <dialog id="modal-exclusao">
+            <div>
+                <span id="alerta-exclusao">Deseja realmente excluir o contato?</span>
+                <button id="btn-sim">Sim</button>
+                <button id="btn-nao">Não</button>
+            </div>
+
+        </dialog>
+    </div>
 
 
 </body>

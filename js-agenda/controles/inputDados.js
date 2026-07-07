@@ -8,9 +8,8 @@ const alertaSobrenome = document.getElementById('alerta-sobrenome');
 const alertaTelefone = document.getElementById('alerta-telefone');
 const alertaEmail = document.getElementById('alerta-email');
 const spanAlerta = document.getElementById('span-alerta');
-const parametro = new URLSearchParams(window.location.search);
-const editar = parametro.has('editar');
-const excluir = parametro.has('excluir');
+const modal = document.getElementById('modal-contato-salvo');
+const botaoFechar = document.getElementById('fechar-mensagem');
 
 formulario.addEventListener('submit', (event) => {
 
@@ -20,13 +19,10 @@ formulario.addEventListener('submit', (event) => {
     alertaSobrenome.setAttribute('hidden', "");
     alertaTelefone.setAttribute('hidden', "");
     alertaEmail.setAttribute('hidden', "");
-
     const formData = new FormData(formulario);
     const dadosObjeto = Object.fromEntries(formData.entries());
     const pessoa = criarPessoa(dadosObjeto);
     const validacao = validaPessoa(pessoa);
-
-    salvarContato(pessoa, validacao);
 
     if (validacao.nome.erro) {
         alertaNome.removeAttribute('hidden');
@@ -47,10 +43,20 @@ formulario.addEventListener('submit', (event) => {
         alertaEmail.removeAttribute('hidden');
         alertaEmail.innerHTML = validacao.email.mensagem;
     };
+    if (validacao.contatoValido) {
+        modal.showModal();
+        salvarContato(pessoa, validacao);
+
+    };
 
     formulario.reset();
 });
 
+botaoFechar.addEventListener('click', () => {
+
+    modal.close();
+
+});
 
 
 

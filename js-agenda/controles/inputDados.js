@@ -1,6 +1,6 @@
 import { criarPessoa } from "../servicos/agendaService.js";
 import { salvarContato, buscaContato, editarContato, deletarContato } from "../repositorio/agendaRepositorio.js";
-import { validaPessoa } from "../validadores/validaPessoa.js";
+import { validaPessoa, verificaDuplicidade } from "../validadores/validaPessoa.js";
 
 const formulario = document.getElementById('formulario-contato');
 const alertaNome = document.getElementById('alerta-nome');
@@ -24,6 +24,9 @@ formulario.addEventListener('submit', (event) => {
     const dadosObjeto = Object.fromEntries(formData.entries());
     const pessoa = criarPessoa(dadosObjeto);
     const validacao = validaPessoa(pessoa);
+    const contatoExistente = verificaDuplicidade(pessoa);
+    console.log(contatoExistente);
+    
     
     if (validacao.nome.erro) {
         alertaNome.removeAttribute('hidden');
@@ -45,18 +48,17 @@ formulario.addEventListener('submit', (event) => {
         alertaEmail.innerHTML = validacao.email.mensagem;
     };
 
-    if (validacao.emailExistente.erro) {
+    if (contatoExistente.email.erro) {
         modal.showModal();
-        alertaCadastro.innerHTML = validacao.emailExistente.mensagem
+        alertaCadastro.innerHTML = contatoExistente.email.mensagem
 
     };
-    if (validacao.telefoneExistente.erro) {
+    if (contatoExistente.telefone.erro) {
         modal.showModal();
-        alertaCadastro.innerHTML = validacao.telefoneExistente.mensagem
-
+        alertaCadastro.innerHTML = contatoExistente.telefone.mensagem
     };
 
-    if (validacao.contatoValido) {
+    if (validacao.contatoValido && contatoExistente.contatoValido) {
         modal.showModal();
         alertaCadastro.innerHTML = 'Contato criado com sucesso!'
         salvarContato(pessoa, validacao);

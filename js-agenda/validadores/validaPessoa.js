@@ -7,7 +7,6 @@ function validaContato(validacao) {
     for (let index = 0; index < dados.length; index++) {
 
         if (dados[index].erro) {
-
             contaErros++;
         };
     };
@@ -21,12 +20,9 @@ function validaContato(validacao) {
 
 export function validaPessoa(pessoa) {
     const validacao = {};
-    const contatoExistente = verificaDuplicidade(pessoa);
     validacao.nome = pessoa.validarNome();
     validacao.telefone = pessoa.contato.validarTelefone();
     validacao.email = pessoa.contato.validarEmail();
-    validacao.emailExistente = contatoExistente.emailExistente;
-    validacao.telefoneExistente = contatoExistente.telefoneExistente;
 
     if (pessoa.sobrenome.length > 0) {
 
@@ -43,7 +39,7 @@ export function validaPessoa(pessoa) {
 
 };
 
-function verificaDuplicidade(pessoa) {
+export function verificaDuplicidade(pessoa) {
     const resultado = {};
     const resultadoTelefone = buscaContato(pessoa.contato.telefone);
     const resultadoEmail = buscaContato(pessoa.contato.email);
@@ -52,21 +48,24 @@ function verificaDuplicidade(pessoa) {
         const verificaTelefone = resultadoTelefone.contato.telefone === pessoa.contato.telefone;
         if (verificaTelefone) {
 
-            resultado.telefoneExistente = { erro: true, mensagem: `Telefone pertece ao contato: ${resultadoTelefone.nome}  ${resultadoTelefone.sobrenome}` };
+            resultado.telefone = { erro: true, mensagem: `Telefone pertece ao contato: ${resultadoTelefone.nome}  ${resultadoTelefone.sobrenome}` };
         };
     } else {
-        resultado.telefoneExistente = { erro: false };
+        resultado.telefone = { erro: false };
     };
 
     if (!resultadoEmail.erro) {
         const verificaEmail = resultadoEmail.contato.email === pessoa.contato.email;
         if (verificaEmail) {
 
-            resultado.emailExistente = { erro: true, mensagem: `Email pertece ao contato: ${resultadoEmail.nome} ${resultadoEmail.sobrenome}` };
+            resultado.email = { erro: true, mensagem: `Email pertece ao contato: ${resultadoEmail.nome} ${resultadoEmail.sobrenome}` };
         };
     } else {
-        resultado.emailExistente = { erro: false };
+        resultado.email = { erro: false };
     };
+    resultado.contatoValido = validaContato(resultado);
 
     return resultado;
-}
+};
+
+

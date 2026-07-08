@@ -148,6 +148,7 @@ formulario.addEventListener('submit', (event) => {
         alertaEmail.removeAttribute('hidden');
         alertaEmail.innerHTML = validacao.email.mensagem;
     };
+    console.log(validacao.contatoValido);
     if (validacao.contatoValido) {
         location.reload();
         modalContato.close();
@@ -159,16 +160,15 @@ botaoExcluir.addEventListener('click', () => {
 
     modalContato.close();
     modalExclusao.showModal();
-
 });
 
 botaoSair.addEventListener('click', () => {
 
     modalContato.close();
-
 });
 
 botaoSim.addEventListener('click', () => { 
+
     deletarContato(referencia);
     location.reload();
 });
@@ -177,21 +177,18 @@ botaoNao.addEventListener('click', () => {
 
     modalContato.showModal();
     modalExclusao.close();
-
 });
 
 botaoBusca.addEventListener('click', () => {
     const input = inputBusca.value;
     if (input.length <= 0) {
+
         const spanBusca = document.createElement('span');
         spanBusca.innerHTML = 'Campo não pode ser vázio!';
         divBusca.appendChild(spanBusca);
-
     } else {
 
         const resultado = buscaContato(input);
-        
-
     };
 });
 

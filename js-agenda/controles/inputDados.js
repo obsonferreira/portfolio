@@ -24,9 +24,7 @@ formulario.addEventListener('submit', (event) => {
     const dadosObjeto = Object.fromEntries(formData.entries());
     const pessoa = criarPessoa(dadosObjeto);
     const validacao = validaPessoa(pessoa);
-    const contatoExistente = verificaDuplicidade(pessoa);
-    console.log(contatoExistente);
-    
+    const contatoExistente = verificaDuplicidade(pessoa);    
     
     if (validacao.nome.erro) {
         alertaNome.removeAttribute('hidden');

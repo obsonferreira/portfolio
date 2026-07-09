@@ -2,11 +2,11 @@ import { validaNome } from "../validadores/validaNome.js";
 
 export class Pessoa {
     constructor(nome, sobrenome, contato) {
-        
+
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.contato = contato;
-        
+
     };
 
     validarNome() {
@@ -20,8 +20,7 @@ export class Pessoa {
         };
 
         return {
-            erro: false,
-            mensagem: "Contato armazenado com sucesso."
+            erro: false
         };
 
     };
@@ -37,18 +36,17 @@ export class Pessoa {
         };
 
         return {
-            erro: false,
-            mensagem: "Contato armazenado com sucesso."
+            erro: false
         };
 
     };
 
-    atualizarNome(novoNome){
+    atualizarNome(novoNome) {
 
         this.nome = novoNome;
-        
+
     };
-    atualizarSobrenome(novoSobrenome){
+    atualizarSobrenome(novoSobrenome) {
 
         this.sobrenome = novoSobrenome;
 

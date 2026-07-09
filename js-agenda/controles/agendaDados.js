@@ -9,7 +9,7 @@ const divBusca = document.getElementById('busca-contato');
 const inputBusca = document.getElementById('input-busca');
 const botaoBusca = document.getElementById('botao-busca');
 const modalContato = document.getElementById('modal-contato');
-const modalExclusao = document.getElementById('modal-exclusao')
+const modalAlertas = document.getElementById('modal-alertas');
 
 const formulario = document.getElementById('formulario-modal');
 const alertaNome = document.getElementById('alerta-nome');
@@ -20,8 +20,11 @@ const spanAlerta = document.getElementById('span-alerta');
 const botaoEditarForm = document.getElementById('editar-form');
 const botaoExcluir = document.getElementById('btn-excluir');
 const botaoSair = document.getElementById('btn-sair');
+const botaoSairAlteracao = document.getElementById('btn-sair-alteracao');
 const botaoSim = document.getElementById('btn-sim');
 const botaoNao = document.getElementById('btn-nao');
+const mensagemExclusao = document.getElementById('container-exclusao');
+const mensagemAlteracao = document.getElementById('container-alteracao');
 
 const lista = retornaLista();
 const tabela = document.getElementById('tabela-contato');
@@ -109,8 +112,8 @@ tabela.addEventListener('click', (event) => {
             };
         };
     };
-    modalContato.showModal();
 
+    modalContato.showModal();
 });
 
 formulario.addEventListener('submit', (event) => {
@@ -145,21 +148,25 @@ formulario.addEventListener('submit', (event) => {
     };
 
     if (validacao.email.erro) {
+
         alertaEmail.removeAttribute('hidden');
         alertaEmail.innerHTML = validacao.email.mensagem;
     };
-    console.log(validacao.contatoValido);
-    if (validacao.contatoValido) {
-        location.reload();
-        modalContato.close();
 
+    if (validacao.contatoValido) {
+
+        modalContato.close();
     };
+
+    mensagemAlteracao.removeAttribute('hidden');
+    modalAlertas.showModal();
 });
 
 botaoExcluir.addEventListener('click', () => {
 
+    mensagemExclusao.removeAttribute('hidden');
     modalContato.close();
-    modalExclusao.showModal();
+    modalAlertas.showModal();
 });
 
 botaoSair.addEventListener('click', () => {
@@ -167,16 +174,22 @@ botaoSair.addEventListener('click', () => {
     modalContato.close();
 });
 
-botaoSim.addEventListener('click', () => { 
+botaoSairAlteracao.addEventListener('click', () => {
+    
+    modalAlertas.close();
+    location.reload();
+});
+
+botaoSim.addEventListener('click', () => {
 
     deletarContato(referencia);
     location.reload();
 });
 
-botaoNao.addEventListener('click', () => { 
+botaoNao.addEventListener('click', () => {
 
     modalContato.showModal();
-    modalExclusao.close();
+    modalAlertas.close();
 });
 
 botaoBusca.addEventListener('click', () => {
@@ -191,5 +204,3 @@ botaoBusca.addEventListener('click', () => {
         const resultado = buscaContato(input);
     };
 });
-
-

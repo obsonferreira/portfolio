@@ -20,8 +20,7 @@ export class Contato {
         };
 
         return {
-            erro: false,
-            mensagem: "Contato armazenado com sucesso."
+            erro: false
         };
     };
 
@@ -36,8 +35,7 @@ export class Contato {
         };
 
         return {
-            erro: false,
-            mensagem: "Contato armazenado com sucesso."
+            erro: false
         };
     };
 

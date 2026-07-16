@@ -100,7 +100,7 @@ formulario.addEventListener('submit', (event) => {
     dados.referencia = referencia;
     exibirErrosValidacao(dados.validacao);
     if (dados.validacao.contatoValido) {
-        editarFormulario()
+        editarFormulario(dados);
     };
     
 });

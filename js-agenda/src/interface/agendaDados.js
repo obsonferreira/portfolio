@@ -27,10 +27,10 @@ const botaoNao = document.getElementById('btn-nao');
 
 const mensagemExclusao = document.getElementById('container-exclusao');
 const mensagemAlteracao = document.getElementById('container-alteracao');
+const tabela = document.getElementById('tabela-contato');
 // const mensagemDuplicidade = document.getElementById('container-duplicidade');
 
 const lista = retornaLista();
-const tabela = document.getElementById('tabela-contato');
 let referencia;
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -58,7 +58,7 @@ export function enviarFormulario(dados) {
     modalContatoSalvo();
 };
 
-export function esconderAlertas() {
+export function ocultarErrosValidacao() {
 
     ocultarAtributo(elementoAlerta.nome);
     ocultarAtributo(elementoAlerta.sobrenome);

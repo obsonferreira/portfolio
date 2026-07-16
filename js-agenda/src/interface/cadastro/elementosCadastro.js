@@ -11,7 +11,7 @@ export const elementoAlerta = {
     telefoneExistente: document.getElementById('alerta-telefone-existente'),
 };
 
-export const elementoDialog = {
+export const elementoDialogo = {
     modalCadastro: document.getElementById('modal-alertas'),
     contatoSalvo: document.getElementById('alerta-contato-salvo'),
     botaoFechar: document.getElementById('fechar-mensagem')

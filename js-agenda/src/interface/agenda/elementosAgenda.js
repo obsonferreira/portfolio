@@ -1,5 +1,3 @@
-
-
 export const elementoAlertaAgenda = {
     alertaNome: document.getElementById('alerta-nome'),
     alertaSobrenome: document.getElementById('alerta-sobrenome'),
@@ -9,9 +7,13 @@ export const elementoAlertaAgenda = {
     mensagemAlteracao: document.getElementById('container-alteracao')
 };
 export const elementoDialogoAlteracaoAgenda = {
-    modalContato: document.getElementById('modal-contato'),
+    modalContato: document.getElementById('modal-contato')
+
+};
+
+export const elementoFormularioAgenda = {
     formulario: document.getElementById('formulario-modal'),
-    botaoEditarForm: document.getElementById('salvar-form')    
+    botaoEditarForm: document.getElementById('salvar-form')
 };
 
 export const elementoDialogoAlertasAgenda = {

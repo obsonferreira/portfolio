@@ -1,20 +1,24 @@
-import { elementoCadastro } from "./elementosCadastro.js";
-import { processaFormulario, exibirErrosValidacao, enviarFormulario, ocultarErrosValidacao } from "./cadastroFormulario.js";
-
+import { elementoAlerta, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
+import { processaFormulario, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
+import {enviarFormulario} from "./cadastroFormulario.js";
 
 export function iniciarProcessamento() {
 
     elementoCadastro.formulario.addEventListener('submit', (event) => {
 
         event.preventDefault();
-        ocultarErrosValidacao();
-        const dados = processaFormulario();
+        ocultarErrosValidacao(elementoAlerta);
+        const dados = processaFormulario(elementoCadastro);
         exibirErrosValidacao(dados.validacao);
         if (dados.validacao.contatoValido) {
 
             enviarFormulario(dados);
             elementoCadastro.formulario.reset();
         };
+    });
 
+    elementoDialogo.botaoFechar.addEventListener('click', () => {
+
+        elementoDialogo.modalCadastro.close();
     });
 };

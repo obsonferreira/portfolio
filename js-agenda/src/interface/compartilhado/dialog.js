@@ -6,8 +6,3 @@ export function modalContatoSalvo() {
     exibirMensagem(elementoDialogo.contatoSalvo, 'Contato criado com sucesso!');
 };
 
-elementoDialogo.botaoFechar.addEventListener('click', () => {
-
-    elementoDialogo.modalCadastro.close();
-
-});

@@ -1,3 +1,3 @@
-import { iniciarProcessamento } from "./cadastroEventos.js";
+import { iniciarCadastro } from "./cadastroEventos.js";
 
-iniciarProcessamento();
+iniciarCadastro();

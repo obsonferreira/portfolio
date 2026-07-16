@@ -1,150 +1,138 @@
-import { ocultarAtributo, exibirAtributo, exibirMensagem  } from './../compartilhado/notificacoes.js';
-import { exibirErrosValidacao, ocultarErrosValidacao, processaFormulario } from './../compartilhado/formulario.js';
-import { elementoAlertaAgenda, elementoDialogoAlteracaoAgenda, elementoFormularioAgenda } from './elementosAgenda.js';
-import { editarFormulario } from './agendaFormulario.js';
-import { retornaLista } from '../../repositorio/agendaRepositorio.js';
+import {
+    ocultarAtributo,
+    exibirAtributo,
+    exibirMensagem
+} from './../compartilhado/notificacoes.js';
+import {
+    exibirErrosValidacao,
+    ocultarErrosValidacao,
+    processaFormulario
+} from './../compartilhado/formulario.js';
+import {
+    elementoVisorAgenda,
+    elementoAlertaAgenda,
+    elementoDialogoAlteracaoAgenda,
+    elementoFormularioAgenda,
+    elementoTabelaAgenda
+} from './elementosAgenda.js';
+import {
+    editarFormulario
+} from './agendaFormulario.js';
+import {
+    retornaLista
+} from '../../repositorio/agendaRepositorio.js';
+import {
+    criarBotaoEditar,
+    criarCelula,
+    preencheFormulario
+} from './agendaTabela.js';
 
-const lista = retornaLista();
-let referencia;
+export function iniciarAgenda() {
 
-document.addEventListener('DOMContentLoaded', () => {
-    const corpo = document.createElement('tbody');
+    const lista = retornaLista();
+    let referencia;
 
-    let quantidadeContatos = lista.length
+    document.addEventListener('DOMContentLoaded', () => {
+        const corpo = document.createElement('tbody');
 
-    spanContato.innerHTML = `${quantidadeContatos > 0 ? 'Contatos' : 'Contato'} salvo: ${quantidadeContatos}`
+        let quantidadeContatos = lista.length
 
-    if (quantidadeContatos === 0) {
+        elementoVisorAgenda.spanContato.innerHTML = `${quantidadeContatos > 0 ? 'Contatos' : 'Contato'} salvo: ${quantidadeContatos}`
 
-        spanSemContato.removeAttribute('hidden');
-        spanSemContato.innerHTML = "Agenda vazia!";
+        if (quantidadeContatos === 0) {
 
-    } else {
+            elementoVisorAgenda.spanSemContato.removeAttribute('hidden');
+            elementoVisorAgenda.spanSemContato.innerHTML = "Agenda vazia!";
 
-        spanSemContato.setAttribute('hidden', "");
+        } else {
 
-        lista.forEach(pessoa => {
-            const valorLinha = document.createElement('tr');
-            valorLinha.classList.add(lista.indexOf(pessoa) + 1);
+            elementoVisorAgenda.spanSemContato.setAttribute('hidden', "");
 
-            const tdIndex = document.createElement('td');
-            tdIndex.textContent = lista.indexOf(pessoa) + 1;
-            valorLinha.appendChild(tdIndex);
+            lista.forEach(pessoa => {
+                const valorLinha = document.createElement('tr');
+                valorLinha.classList.add(lista.indexOf(pessoa) + 1);
 
-            const tdNome = document.createElement('td');
-            tdNome.textContent = pessoa.nome;
-            valorLinha.appendChild(tdNome);
+                valorLinha.appendChild(criarCelula(lista.indexOf(pessoa) + 1));
+                valorLinha.appendChild(criarCelula(pessoa.nome));
+                valorLinha.appendChild(criarCelula(pessoa.sobrenome));
 
-            const tdSobrenome = document.createElement('td');
-            tdSobrenome.textContent = pessoa.sobrenome;
-            valorLinha.appendChild(tdSobrenome);
+                [pessoa.contato].forEach(contatos => {
 
-            [pessoa.contato].forEach(contatos => {
+                    valorLinha.appendChild(criarCelula(contatos.telefone));
+                    valorLinha.appendChild(criarCelula(contatos.email));
 
-                const tdTelefone = document.createElement('td');
-                tdTelefone.textContent = contatos.telefone;
-                valorLinha.appendChild(tdTelefone);
+                });
 
-                const tdEmail = document.createElement('td');
-                tdEmail.textContent = contatos.email;
-                valorLinha.appendChild(tdEmail);
-
+                valorLinha.appendChild(criarBotaoEditar(pessoa.id));
+                corpo.appendChild(valorLinha);
             });
-
-            const tdEditar = document.createElement('button');
-            tdEditar.classList.add('btn-editar');
-            tdEditar.textContent = 'Editar';
-            tdEditar.dataset.pessoa = pessoa.id;
-
-            valorLinha.appendChild(tdEditar);
-            corpo.appendChild(valorLinha);
-        });
-        tabela.appendChild(corpo);
-
-
-    };
-});
-
-tabela.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    const dadosBusca = event.target.getAttribute('data-pessoa');
-    const dados = buscaContato(dadosBusca);
-    referencia = parseInt(dadosBusca);
-    for (const chave in dados) {
-
-        if (formulario.elements[chave]) {
-
-            formulario.elements[chave].value = dados[chave];
+            elementoTabelaAgenda.tabela.appendChild(corpo);
 
         };
-        if (chave === "contato") {
+    });
 
-            for (const contato in dados.contato) {
+    elementoTabelaAgenda.tabela.addEventListener('click', (event) => {
+        event.preventDefault();
 
-                if (formulario.elements[contato]) {
-                    formulario.elements[contato].value = dados.contato[contato];
-                };
-            };
+        const dadosBusca = event.target.getAttribute('data-pessoa');
+        referencia = parseInt(dadosBusca);
+        preencheFormulario(elementoFormularioAgenda.formulario, dadosBusca);
+    });
+
+    elementoFormularioAgenda.formulario.addEventListener('submit', (event) => {
+
+        event.preventDefault();
+        ocultarErrosValidacao(elementoAlertaAgenda);
+        const dados = processaFormulario(elementoFormularioAgenda.formulario);
+        dados.referencia = referencia;
+        exibirErrosValidacao(dados.validacao);
+        if (dados.validacao.contatoValido) {
+            editarFormulario(dados);
         };
-    };
 
-    modalContato.showModal();
-});
+    });
 
-formulario.addEventListener('submit', (event) => {
+    botaoExcluir.addEventListener('click', () => {
 
-    event.preventDefault();
-    ocultarErrosValidacao(elementoAlertaAgenda);
-    const dados = processaFormulario(elementoFormularioAgenda.formulario);
-    dados.referencia = referencia;
-    exibirErrosValidacao(dados.validacao);
-    if (dados.validacao.contatoValido) {
-        editarFormulario(dados);
-    };
-    
-});
+        mensagemExclusao.removeAttribute('hidden');
+        modalContato.close();
+        modalAlertas.showModal();
+    });
 
-botaoExcluir.addEventListener('click', () => {
+    botaoSair.addEventListener('click', () => {
 
-    mensagemExclusao.removeAttribute('hidden');
-    modalContato.close();
-    modalAlertas.showModal();
-});
+        modalContato.close();
 
-botaoSair.addEventListener('click', () => {
+    });
 
-    modalContato.close();
+    botaoSairAlteracao.addEventListener('click', () => {
 
-});
+        modalAlertas.close();
+        location.reload();
+    });
 
-botaoSairAlteracao.addEventListener('click', () => {
+    botaoSim.addEventListener('click', () => {
 
-    modalAlertas.close();
-    location.reload();
-});
+        deletarContato(referencia);
+        location.reload();
+    });
 
-botaoSim.addEventListener('click', () => {
+    botaoNao.addEventListener('click', () => {
 
-    deletarContato(referencia);
-    location.reload();
-});
+        modalContato.showModal();
+        modalAlertas.close();
+    });
 
-botaoNao.addEventListener('click', () => {
+    botaoBusca.addEventListener('click', () => {
+        const input = inputBusca.value;
+        if (input.length <= 0) {
 
-    modalContato.showModal();
-    modalAlertas.close();
-});
+            const spanBusca = document.createElement('span');
+            spanBusca.innerHTML = 'Campo não pode ser vázio!';
+            divBusca.appendChild(spanBusca);
+        } else {
 
-botaoBusca.addEventListener('click', () => {
-    const input = inputBusca.value;
-    if (input.length <= 0) {
-
-        const spanBusca = document.createElement('span');
-        spanBusca.innerHTML = 'Campo não pode ser vázio!';
-        divBusca.appendChild(spanBusca);
-    } else {
-
-        const resultado = buscaContato(input);
-    };
-});
+            const resultado = buscaContato(input);
+        };
+    });
+};

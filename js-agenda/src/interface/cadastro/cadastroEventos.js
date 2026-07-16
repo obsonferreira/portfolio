@@ -2,7 +2,7 @@ import { elementoAlerta, elementoCadastro, elementoDialogo } from "./elementosCa
 import { processaFormulario, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
 import {enviarFormulario} from "./cadastroFormulario.js";
 
-export function iniciarProcessamento() {
+export function iniciarCadastro() {
 
     elementoCadastro.formulario.addEventListener('submit', (event) => {
 

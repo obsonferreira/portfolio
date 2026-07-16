@@ -6,3 +6,6 @@ export function modalContatoSalvo() {
     exibirMensagem(elementoDialogo.contatoSalvo, 'Contato criado com sucesso!');
 };
 
+export function modal(params) {
+    
+}

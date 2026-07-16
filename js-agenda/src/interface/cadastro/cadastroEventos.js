@@ -1,5 +1,5 @@
 import { elementoCadastro } from "./elementosCadastro.js";
-import { processaFormulario, exibirErrosValidacao, enviarFormulario } from "./cadastroFormulario.js";
+import { processaFormulario, exibirErrosValidacao, enviarFormulario, esconderAlertas } from "./cadastroFormulario.js";
 
 
 export function iniciarProcessamento() {
@@ -7,13 +7,14 @@ export function iniciarProcessamento() {
     elementoCadastro.formulario.addEventListener('submit', (event) => {
 
         event.preventDefault();
+        esconderAlertas();
         const dados = processaFormulario();
         exibirErrosValidacao(dados.validacao);
         if (dados.validacao.contatoValido) {
 
             enviarFormulario(dados);
+            elementoCadastro.formulario.reset();
         };
 
-        elementoCadastro.formulario.reset();
     });
 };

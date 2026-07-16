@@ -55,5 +55,13 @@ export function exibirErrosValidacao(validacao) {
 export function enviarFormulario(dados) {
 
     salvarContato(dados.pessoa, dados.validacao);
-    modalContatoSalvo()
+    modalContatoSalvo();
+};
+
+export function esconderAlertas() {
+
+    ocultarAtributo(elementoAlerta.nome);
+    ocultarAtributo(elementoAlerta.sobrenome);
+    ocultarAtributo(elementoAlerta.telefone);
+    ocultarAtributo(elementoAlerta.email);
 };

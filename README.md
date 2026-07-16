@@ -30,7 +30,6 @@ Valida CPF com regex. Projeto simples pra praticar expressões regulares e manip
 ## Contato
 - Email: obsonpereira@gmail.com
 - GitHub: [obsonferreira](https://github.com/obsonferreira)
-- Mais links: Veja no [index.html](./index.html) do projeto
 
 ---
 

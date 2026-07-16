@@ -28,9 +28,9 @@ Valida CPF com regex. Projeto simples pra praticar expressões regulares e manip
 - Depois partir pro backend (Node.js)
 
 ## Contato
+- Email: obsonpereira@gmail.com
 - GitHub: [obsonferreira](https://github.com/obsonferreira)
-- Email: seu-email@email.com
-- LinkedIn: seu-link
+- Mais links: Veja no [index.html](./index.html) do projeto
 
 ---
 

@@ -1,33 +1,41 @@
-const spanContato = document.getElementById('quantidade-contatos');
-const spanSemContato = document.getElementById('sem-contato');
-const divBusca = document.getElementById('busca-contato');
-const inputBusca = document.getElementById('input-busca');
 
-const modalContato = document.getElementById('modal-contato');
-const modalAlertas = document.getElementById('modal-alertas');
-const formulario = document.getElementById('formulario-modal');
 
-const alertaNome = document.getElementById('alerta-nome');
-const alertaSobrenome = document.getElementById('alerta-sobrenome');
-const alertaTelefone = document.getElementById('alerta-telefone');
-const alertaEmail = document.getElementById('alerta-email');
+export const elementoAlertaAgenda = {
+    alertaNome: document.getElementById('alerta-nome'),
+    alertaSobrenome: document.getElementById('alerta-sobrenome'),
+    alertaTelefone: document.getElementById('alerta-telefone'),
+    alertaEmail: document.getElementById('alerta-email'),
+    mensagemExclusao: document.getElementById('container-exclusao'),
+    mensagemAlteracao: document.getElementById('container-alteracao')
+};
+export const elementoDialogoAlteracaoAgenda = {
+    modalContato: document.getElementById('modal-contato'),
+    formulario: document.getElementById('formulario-modal'),
+    botaoEditarForm: document.getElementById('salvar-form')    
+};
 
-const botaoBusca = document.getElementById('botao-busca');
-const botaoEditarForm = document.getElementById('editar-form');
-const botaoExcluir = document.getElementById('btn-excluir');
-const botaoSair = document.getElementById('btn-sair');
-const botaoSairAlteracao = document.getElementById('btn-sair-alteracao');
-const botaoSairDuplicida = document.getElementById('btn-sair-duplicidade');
-const botaoSim = document.getElementById('btn-sim');
-const botaoNao = document.getElementById('btn-nao');
+export const elementoDialogoAlertasAgenda = {
+    modalAlertas: document.getElementById('modal-alertas'),
+    botaoSim: document.getElementById('btn-sim'),
+    botaoNao: document.getElementById('btn-nao'),
+    botaoSairAlteracao: document.getElementById('btn-sair-alteracao')
+};
+export const elementoVisorAgenda = {
+    spanContato: document.getElementById('quantidade-contatos'),
+    spanSemContato: document.getElementById('sem-contato')
+};
 
-const mensagemExclusao = document.getElementById('container-exclusao');
-const mensagemAlteracao = document.getElementById('container-alteracao');
+export const elementoBotoesAgenda = {
+    botaoExcluir: document.getElementById('btn-excluir'),
+    botaoSair: document.getElementById('btn-sair')
+};
 
-const tabela = document.getElementById('tabela-contato');
+export const elementoBuscaAgenda = {
+    divBusca: document.getElementById('busca-contato'),
+    inputBusca: document.getElementById('input-busca'),
+    botaoBusca: document.getElementById('botao-busca')
+};
 
-export const elementoAlertaAgenda = {};
-export const elementoDialogoAgenda = {};
-export const elementoVisorAgenda = {};
-export const elementoCadastroAgenda = {};
-export const elementoTabelaAgenda = {};
+export const elementoTabelaAgenda = {
+    tabela: document.getElementById('tabela-contato')
+};

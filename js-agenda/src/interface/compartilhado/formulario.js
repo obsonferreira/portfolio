@@ -1,21 +1,6 @@
 import { exibirMensagem, ocultarAtributo, exibirAtributo} from "../compartilhado/notificacoes.js";
-import { criarPessoa } from "../../servicos/agendaService.js";
-import { validaPessoa, verificaDuplicidade } from "../../validadores/validaPessoa.js";
 
-export function processaFormulario(elemento) {
-    const formData = new FormData(elemento.formulario);
-    const dadosObjeto = Object.fromEntries(formData.entries());
-    const pessoa = criarPessoa(dadosObjeto);
-    const validacao = validaPessoa(pessoa);
-    const dados = {
-        pessoa: pessoa,
-        validacao: validacao
-    }
-    // const contatoExistente = verificaDuplicidade(pessoa);
-    return dados;
-};
-
-export function exibirErrosValidacao(validacao) {
+export function exibirErrosValidacao(validacao, elementoAlerta) {
 
     if (validacao.nome.erro) {
         exibirAtributo(elementoAlerta.nome);

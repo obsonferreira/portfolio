@@ -1,3 +1,10 @@
-import { elementoAlerta } from "../cadastro/elementosCadastro.js";
+import {
+    elementoAlerta
+} from "../cadastro/elementosCadastro.js";
 
 
+export function alertaBuscaContato() {
+    const alertaBusca = document.createElement('span');
+    alertaBusca.textContent = 'Campo não pode ser vázio!';
+    return alertaBusca;
+};

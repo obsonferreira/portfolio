@@ -1,13 +1,13 @@
 
 export function ocultarAtributo(elemento) {
 
-    return elemento.setAttribute('hidden', "");
+    return elemento.setAttribute('hidden', '');
 
 };
 
 export function exibirAtributo(elemento) {
 
-    return elemento.removeAttribute('hidden', "");
+    return elemento.removeAttribute('hidden');
 
 };
 

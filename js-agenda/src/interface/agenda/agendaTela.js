@@ -1,3 +1,3 @@
-import { iniciarAgenda} forma"./agenda evento.js";
+import { iniciarAgenda } from './agendaEventos.js';
 
 iniciarAgenda();

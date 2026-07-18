@@ -59,8 +59,8 @@ function retornaComposicaoInput(inputUser) {
 
     componentes.quantidadeEspaco = inputUser.replace(/[^\s]/g, "").length;
     componentes.tamnhoInput = inputUser.length;
-    componentes.caracteresEspecial = inputUser.replace(/[^\W_]/g, "");
-    componentes.letras = inputUser.replace(/[^a-z]/g, "");
+    componentes.caracteresEspecial = inputUser.replace(/[\p{L}\p{N}]/gu, "");
+    componentes.letras = inputUser.replace(/[^\p{L}]/gu, "");
     componentes.numero = inputUser.replace(/[^\d]/g, "");
 
     return componentes;

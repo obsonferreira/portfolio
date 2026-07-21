@@ -1,13 +1,15 @@
-export function validaEmail(inputUser) {
-    let resultado = {};
-    let input = retornaComposicaoEmail(inputUser);
-    let validacao = validaInputEmail(input);
+import { retornaComposicaoEmail } from "./analisaTexto.js";
 
-    resultado.email = inputUser;
+export function validaEmail(input, campo) {
+    let resultado = {};
+    const componentes = retornaComposicaoEmail(input);
+    const validacao = validaInputEmail(componentes);
 
     if (validacao.quantidadeEspaco) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Email não pode ter espaço, verifique o email digitado!`
         };
@@ -15,6 +17,8 @@ export function validaEmail(inputUser) {
     } else if (validacao.nomeDominio) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `O email falta nome do dominio ou faltando digitos, verifique o email digitado!`
         };
@@ -22,6 +26,8 @@ export function validaEmail(inputUser) {
     } else if (validacao.complementoDominio) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `O email faltando ".com" ou similar, verifique o email digitado!`
         };
@@ -29,6 +35,8 @@ export function validaEmail(inputUser) {
     } else if (validacao.arrobaExtra) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Email com "@" excedente, verifique o email digitado!`
         };
@@ -36,6 +44,8 @@ export function validaEmail(inputUser) {
     } else if (validacao.semArroba) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Email sem "@", verifique o email digitado!`
         };
@@ -43,6 +53,8 @@ export function validaEmail(inputUser) {
     } else if (validacao.pontoExtraDominio) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Email com "." excedente, verifique o email digitado!`
         };
@@ -50,6 +62,8 @@ export function validaEmail(inputUser) {
     } else if (validacao.semPontoDominio) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Email sem ".", verifique o email digitado!`
         };
@@ -57,47 +71,61 @@ export function validaEmail(inputUser) {
     } else if (validacao.caracteresInvalidosIdEmail) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
-            mensagem: `Email contém  ${input.caracteresInvalidosIdEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${input.caracteresInvalidosIdEmail} ", verifique o email digitado!`
+            mensagem: `Email contém  ${componentes.caracteresInvalidosIdEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${componentes.caracteresInvalidosIdEmail} ", verifique o email digitado!`
         };
 
     } else if (validacao.caracteresInvalidosDominioEmail) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
-            mensagem: `Domínio do email ${input.caracteresInvalidosDominioEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${input.caracteresInvalidosDominioEmail} ", verifique o email digitado!`
+            mensagem: `Domínio do email ${componentes.caracteresInvalidosDominioEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${componentes.caracteresInvalidosDominioEmail} ", verifique o email digitado!`
         };
 
     } else if (validacao.inicioInvalido) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
-            mensagem: `O email não pode iniciar com "${input.primeiroDigitoEmail}", verifique o email digitado!`
+            mensagem: `O email não pode iniciar com "${componentes.primeiroDigitoEmail}", verifique o email digitado!`
         };
 
     } else if (validacao.finalInvalido) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
-            mensagem: `O email não pode terminar com "${input.ultimoDigitoEmail}", verifique o email digitado!`
+            mensagem: `O email não pode terminar com "${componentes.ultimoDigitoEmail}", verifique o email digitado!`
         };
 
     } else if (validacao.caracterConsecutivosDominioEmail) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
-            mensagem: `O email não pode ter apos o "@", "${input.caracterConsecutivosDominioEmail}" consecutivos, verifique o email digitado!`
+            mensagem: `O email não pode ter apos o "@", "${componentes.caracterConsecutivosDominioEmail}" consecutivos, verifique o email digitado!`
         };
 
     } else if (validacao.caracterConsecutivosIdEmail) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
-            mensagem: `O email não pode ter "${input.caracterConsecutivosIdEmail}" consecutivos, verifique o email digitado!`
+            mensagem: `O email não pode ter "${componentes.caracterConsecutivosIdEmail}" consecutivos, verifique o email digitado!`
         };
 
     } else {
         resultado = {
+            campo: campo,
+            valor: input,
             erro: false,
             mensagem: ""
         };
@@ -107,55 +135,27 @@ export function validaEmail(inputUser) {
 };
 
 function validaInputEmail(inputUser) {
-    let resultado = {};
+
     const caracteresEspecial = /^[\W_]$/;
 
-    resultado.quantidadeEspaco = inputUser.quantidadeEspaco > 0;
-    resultado.semArroba = inputUser.caracterValidoEmail.length === 0;
-    resultado.arrobaExtra = inputUser.caracterValidoEmail.length > 1;
+    return {
+        quantidadeEspaco: inputUser.quantidadeEspaco > 0,
+        semArroba: inputUser.caracterValidoEmail.length === 0,
+        arrobaExtra: inputUser.caracterValidoEmail.length > 1,
 
-    resultado.caracteresInvalidosIdEmail = inputUser.caracteresInvalidosIdEmail.length > 0;
-    resultado.caracterConsecutivosIdEmail = inputUser.caracterConsecutivosIdEmail.length > 0;
-    resultado.nomeDominio = inputUser.nomeDominio.length <= 1;
-    resultado.complementoDominio = inputUser.complementoDominio.length <= 1;
+        caracteresInvalidosIdEmail: inputUser.caracteresInvalidosIdEmail.length > 0,
+        caracterConsecutivosIdEmail: inputUser.caracterConsecutivosIdEmail.length > 0,
+        nomeDominio: inputUser.nomeDominio.length <= 1,
+        complementoDominio: inputUser.complementoDominio.length <= 1,
 
-    resultado.inicioInvalido = caracteresEspecial.test(inputUser.primeiroDigitoEmail);
-    resultado.finalInvalido = caracteresEspecial.test(inputUser.ultimoDigitoEmail);
+        inicioInvalido: caracteresEspecial.test(inputUser.primeiroDigitoEmail),
+        finalInvalido: caracteresEspecial.test(inputUser.ultimoDigitoEmail),
 
-    resultado.caracterConsecutivosDominioEmail = inputUser.caracterConsecutivosDominioEmail.length > 0;
-    resultado.caracteresInvalidosDominioEmail = inputUser.caracteresInvalidosDominioEmail.length > 0;
-    resultado.pontoExtraDominio = inputUser.caracterValidosDominioEmail.length > 2;
-    resultado.semPontoDominio = inputUser.caracterValidosDominioEmail.length === 0;
-
-    return resultado;
-};
-
-function retornaComposicaoEmail(inputUser) {
-    let componentes = {};
-
-    let posicaoArroba = inputUser.indexOf('@');
-
-    componentes.quantidadeEspaco = inputUser.replace(/[^\s]/g, "").length;
-    componentes.tamnhoInput = inputUser.length;
-
-    componentes.idEmail = inputUser.substring(0, posicaoArroba);
-    componentes.caracteresInvalidosIdEmail = componentes.idEmail.replace(/[\w_.]/g, "");
-    componentes.caracterConsecutivosIdEmail = retornaConsecutivos(componentes.idEmail);
-
-    componentes.dominioEmail = inputUser.substring(posicaoArroba + 1);
-    componentes.caracteresInvalidosDominioEmail = componentes.dominioEmail.replace(/[A-Za-z.]/g, "");
-    componentes.nomeDominio = componentes.dominioEmail.substring(0, componentes.dominioEmail.indexOf('.'));
-    componentes.complementoDominio = componentes.dominioEmail.substring(componentes.dominioEmail.indexOf('.') + 1, componentes.dominioEmail.length);
-
-    componentes.caracterConsecutivosDominioEmail = retornaConsecutivos(componentes.dominioEmail);
-    componentes.caracterValidosDominioEmail = componentes.dominioEmail.replace(/[^.]/g, "");
-
-    componentes.caracterValidoEmail = inputUser.replace(/[^@]/g, "");
-
-    componentes.primeiroDigitoEmail = inputUser.at(0);
-    componentes.ultimoDigitoEmail = inputUser.at(componentes.tamnhoInput - 1);
-
-    return componentes;
+        caracterConsecutivosDominioEmail: inputUser.caracterConsecutivosDominioEmail.length > 0,
+        caracteresInvalidosDominioEmail: inputUser.caracteresInvalidosDominioEmail.length > 0,
+        pontoExtraDominio: inputUser.caracterValidosDominioEmail.length > 2,
+        semPontoDominio: inputUser.caracterValidosDominioEmail.length === 0
+    };
 };
 
 function retornaConsecutivos(inputUser) {
@@ -176,4 +176,3 @@ function retornaConsecutivos(inputUser) {
 
     return iguais;
 };
-

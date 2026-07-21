@@ -56,9 +56,10 @@ export function iniciarAgenda() {
     elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
         ocultarErrosValidacao(elementoAlertaAgenda);
-        const dados = processaFormulario(elementoFormularioAgenda.formulario);
+        const dados = processaFormulario(elementoFormularioAgenda);
         dados.referencia = referencia;
         exibirErrosValidacao(dados.validacao, elementoAlertaAgenda);
+        
         if (dados.validacao.contatoValido) {
             editarFormulario(dados);
         }

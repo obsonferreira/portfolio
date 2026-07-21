@@ -1,6 +1,6 @@
 import { retornaComposicaoInput } from './analisaTexto.js';
 
-export function validaNome(input,campo) {
+export function validaNome(input, campo) {
     let resultado = {};
     const inputMinusculo = input.toLowerCase();
     const componentes = retornaComposicaoInput(inputMinusculo);

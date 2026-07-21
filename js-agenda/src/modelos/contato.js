@@ -11,32 +11,17 @@ export class Contato {
 
     validarTelefone() {
 
-        const resultado = validaTelefone(this.telefone,'telefone');
+        const resultado = validaTelefone(this.telefone, 'telefone');
 
-        if (resultado.erro) {
+        return resultado;
 
-            return resultado;
-
-        };
-
-        return {
-            erro: false
-        };
     };
 
     validarEmail() {
 
         const resultado = validaEmail(this.email, 'email');
 
-        if (resultado.erro) {
-
-            return resultado;
-
-        };
-
-        return {
-            erro: false
-        };
+        return resultado;
     };
 
     atualizarTelefone(novoTelefone) {

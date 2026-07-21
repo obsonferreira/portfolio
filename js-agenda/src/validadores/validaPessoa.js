@@ -22,19 +22,18 @@ function validaContato(validacao) {
 export function validaPessoa(pessoa) {
     const validacao = {};
     validacao.nome = pessoa.validarNome();
+    validacao.sobrenome = pessoa.validarSobrenome();
     validacao.telefone = pessoa.contato.validarTelefone();
     validacao.email = pessoa.contato.validarEmail();
 
-    if (pessoa.sobrenome.length > 0) {
+    if (pessoa.sobrenome.length <= 0) {
 
-        validacao.sobrenome = pessoa.validarSobrenome();
-
-    } else {
-
-        validacao.sobrenome = { sobrenome: "", erro: false }
+        validacao.sobrenome.erro = false;
+        validacao.sobrenome.mensagem = '';
 
     };
-    validacao.contatoValido = validaContato(validacao)
+
+    validacao.contatoValido = validaContato(validacao);
 
     return validacao;
 

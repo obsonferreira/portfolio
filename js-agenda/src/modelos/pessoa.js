@@ -13,32 +13,15 @@ export class Pessoa {
 
         const resultado = validaNome(this.nome, 'nome');
 
-        if (resultado.erro) {
-
-            return resultado;
-
-        };
-
-        return {
-            erro: false
-        };
+        return resultado;
 
     };
 
     validarSobrenome() {
 
-        const resultado = validaNome(this.sobrenome,'sobrenome');
+        const resultado = validaNome(this.sobrenome, 'sobrenome');
 
-        if (resultado.erro) {
-
-            return resultado;
-
-        };
-
-        return {
-            erro: false
-        };
-
+        return resultado;
     };
 
     atualizarNome(novoNome) {

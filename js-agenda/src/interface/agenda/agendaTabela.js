@@ -26,9 +26,11 @@ export function criarCelula(texto) {
 }
 
 export function criarBotaoEditar(pessoa) {
+    const td = document.createElement("td");
     const botao = document.createElement("button");
     botao.classList.add("btn-editar");
     botao.textContent = "Editar";
     botao.dataset.pessoa = pessoa;
-    return botao;
+    td.appendChild(botao);
+    return td;
 }

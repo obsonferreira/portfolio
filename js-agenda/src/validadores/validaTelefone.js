@@ -1,4 +1,5 @@
-//  Funções principais para validações
+import { retornaComposicaoInput } from './analisaTexto.js';
+
 export function validaTelefone(inputUser) {
     let resultado = {};
     let input = retornaComposicaoInput(inputUser);
@@ -6,44 +7,44 @@ export function validaTelefone(inputUser) {
 
     resultado.telefone = inputUser;
 
+    if (validacao.quantidadeEspaco) {
 
-    if (input.quantidadeEspaco === input.tamnhoInput) {
+        resultado = {
+            erro: true,
+            mensagem: `Telefone não pode ter espaço, verifique o telefone digitado!`
+        };
 
-        resultado.erro = true;
-        resultado.mensagem = `Campo obrigatório, digite um telefone válido!`;
+    } else if (validacao.caracteresInvalidos) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Telefone contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
+        };
+
+    } else if (validacao.tamanhoMenor) {
+
+        resultado = {
+            erro: true,
+            mensagem: "Telefone faltando digitos, digite os 9 digitos!"
+        };
+
+    } else if (validacao.tamanhoMaior) {
+
+        resultado = {
+            erro: true,
+            mensagem: "Telefone com muitos digitos, digite apenas 9 digitos!"
+        };
 
     } else {
-        if (validacao.quantidadeEspaco) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Telefone não pode ter espaço, verifique o telefone digitado!`;
-
-        } else if (validacao.caracteresInvalidos) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Telefone contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`;
-
-        } else if (validacao.tamanhoMenor) {
-
-            resultado.erro = true;
-            resultado.mensagem = "Telefone faltando digitos, digite os 9 digitos!";
-
-        } else if (validacao.tamanhoMaior) {
-
-            resultado.erro = true;
-            resultado.mensagem = "Telefone com muitos digitos, digite apenas 9 digitos!";
-
-        } else {
-
-            resultado.erro = false;
-
+        resultado = {
+            erro: false,
+            mensagem: ""
         };
     };
-    return resultado;
 
+    return resultado;
 };
 
-// funções gerais para validar telefone
 function validaInputFone(inputUser) {
     let resultado = {};
 
@@ -54,18 +55,4 @@ function validaInputFone(inputUser) {
     resultado.caracteres = inputUser.letras + inputUser.caracteresEspecial;
 
     return resultado;
-};
-
-// funções gerais de validação
-function retornaComposicaoInput(inputUser) {
-    let componentes = {};
-
-    componentes.quantidadeEspaco = inputUser.replace(/[^\s]/g, "").length;
-    componentes.tamnhoInput = inputUser.length;
-    componentes.caracteresEspecial = inputUser.replace(/[^\W_]/g, "");
-    componentes.letras = inputUser.replace(/[^a-z]/g, "");
-    componentes.numero = inputUser.replace(/[^\d]/g, "");
-
-    return componentes;
-
 };

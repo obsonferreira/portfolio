@@ -1,3 +1,4 @@
+import { retornaComposicaoInput } from './analisaTexto.js';
 
 export function validaNome(inputUser) {
     let resultado = {};
@@ -6,40 +7,37 @@ export function validaNome(inputUser) {
 
     resultado.nome = inputUser.toLowerCase();
 
-    if (input.quantidadeEspaco === input.tamnhoInput) {
+    if (validacao.quantidadeEspaco) {
 
-        resultado.erro = true;
-        resultado.mensagem = `Campo obrigatório, digite um nome válido!`;
+        resultado = {
+            erro: true,
+            mensagem: `Campo não pode ter espaço, verifique o campo novamente!`
+        };
+
+    } else if (validacao.caracteresInvalidos) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Campo contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
+        };
+
+    } else if (validacao.tamanho) {
+
+        resultado = {
+            erro: true,
+            mensagem: "Campo curto, campo deve ter minimo 3 letras!"
+        };
 
     } else {
 
-        if (validacao.quantidadeEspaco) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Campo não pode ter espaço, verifique o campo novamente!`;
-
-        } else if (validacao.caracteresInvalidos) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Campo contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`;
-
-        } else if (validacao.tamanho) {
-
-            resultado.erro = true;
-            resultado.mensagem = "Campo curto, campo deve ter minimo 3 letras!";
-
-        } else {
-
-            resultado.erro = false;
-
+        resultado = {
+            erro: false,
+            mensagem: ""
         };
     };
 
     return resultado;
-
 };
-
-// funções gerais para validar nome
 
 function validaInputNome(inputUser) {
     let resultado = {};
@@ -52,17 +50,5 @@ function validaInputNome(inputUser) {
     return resultado;
 };
 
-// funções gerais de validação
 
-function retornaComposicaoInput(inputUser) {
-    let componentes = {};
 
-    componentes.quantidadeEspaco = inputUser.replace(/[^\s]/g, "").length;
-    componentes.tamnhoInput = inputUser.length;
-    componentes.caracteresEspecial = inputUser.replace(/[\p{L}\p{N}]/gu, "");
-    componentes.letras = inputUser.replace(/[^\p{L}]/gu, "");
-    componentes.numero = inputUser.replace(/[^\d]/g, "");
-
-    return componentes;
-
-};

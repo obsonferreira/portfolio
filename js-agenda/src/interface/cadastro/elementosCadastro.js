@@ -1,5 +1,6 @@
 export const elementoCadastro = {
-    formulario: document.getElementById('formulario-contato')
+
+    formulario: document.forms['formulario-contato']
 };
 
 export const elementoAlerta = {
@@ -15,4 +16,8 @@ export const elementoDialogo = {
     modalCadastro: document.getElementById('modal-alertas'),
     contatoSalvo: document.getElementById('alerta-contato-salvo'),
     botaoFechar: document.getElementById('fechar-mensagem')
+};
+
+export const elementoBotoes = {
+    botaoSubmit: document.getElementById('botao-formulario')
 };

@@ -1,4 +1,4 @@
-import { exibirMensagem, ocultarAtributo, exibirAtributo} from "../compartilhado/notificacoes.js";
+import { exibirMensagem, ocultarAtributo, exibirAtributo } from "../compartilhado/notificacoes.js";
 
 export function exibirErrosValidacao(validacao, elementoAlerta) {
 
@@ -40,3 +40,19 @@ export function ocultarErrosValidacao(elemento) {
     ocultarAtributo(elemento.telefone);
     ocultarAtributo(elemento.email);
 };
+
+export function exibirErrosCampos(dados, elementoAlerta) {
+    if (dados.erro) {
+        exibirAtributo(elementoAlerta[dados.campo]);
+        exibirMensagem(elementoAlerta[dados.campo], dados.mensagem);
+    };
+
+};
+
+export function bloquearBotao(validacao,elemento) {
+    if (validacao.erro) {
+        elemento.botaoSubmit.disabled = true;
+    } else {
+        elemento.botaoSubmit.disabled= false;
+    }
+}

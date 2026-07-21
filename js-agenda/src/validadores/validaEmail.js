@@ -5,86 +5,106 @@ export function validaEmail(inputUser) {
 
     resultado.email = inputUser;
 
-    if (input.quantidadeEspaco === input.tamnhoInput) {
+    if (validacao.quantidadeEspaco) {
 
-        resultado.erro = true;
-        resultado.mensagem = `Campo obrigatório, digite um email válido!`;
+        resultado = {
+            erro: true,
+            mensagem: `Email não pode ter espaço, verifique o email digitado!`
+        };
+
+    } else if (validacao.nomeDominio) {
+
+        resultado = {
+            erro: true,
+            mensagem: `O email falta nome do dominio ou faltando digitos, verifique o email digitado!`
+        };
+
+    } else if (validacao.complementoDominio) {
+
+        resultado = {
+            erro: true,
+            mensagem: `O email faltando ".com" ou similar, verifique o email digitado!`
+        };
+
+    } else if (validacao.arrobaExtra) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Email com "@" excedente, verifique o email digitado!`
+        };
+
+    } else if (validacao.semArroba) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Email sem "@", verifique o email digitado!`
+        };
+
+    } else if (validacao.pontoExtraDominio) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Email com "." excedente, verifique o email digitado!`
+        };
+
+    } else if (validacao.semPontoDominio) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Email sem ".", verifique o email digitado!`
+        };
+
+    } else if (validacao.caracteresInvalidosIdEmail) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Email contém  ${input.caracteresInvalidosIdEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${input.caracteresInvalidosIdEmail} ", verifique o email digitado!`
+        };
+
+    } else if (validacao.caracteresInvalidosDominioEmail) {
+
+        resultado = {
+            erro: true,
+            mensagem: `Domínio do email ${input.caracteresInvalidosDominioEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${input.caracteresInvalidosDominioEmail} ", verifique o email digitado!`
+        };
+
+    } else if (validacao.inicioInvalido) {
+
+        resultado = {
+            erro: true,
+            mensagem: `O email não pode iniciar com "${input.primeiroDigitoEmail}", verifique o email digitado!`
+        };
+
+    } else if (validacao.finalInvalido) {
+
+        resultado = {
+            erro: true,
+            mensagem: `O email não pode terminar com "${input.ultimoDigitoEmail}", verifique o email digitado!`
+        };
+
+    } else if (validacao.caracterConsecutivosDominioEmail) {
+
+        resultado = {
+            erro: true,
+            mensagem: `O email não pode ter apos o "@", "${input.caracterConsecutivosDominioEmail}" consecutivos, verifique o email digitado!`
+        };
+
+    } else if (validacao.caracterConsecutivosIdEmail) {
+
+        resultado = {
+            erro: true,
+            mensagem: `O email não pode ter "${input.caracterConsecutivosIdEmail}" consecutivos, verifique o email digitado!`
+        };
 
     } else {
-
-        if (validacao.quantidadeEspaco) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Email não pode ter espaço, verifique o email digitado!`;
-
-        } else if (validacao.nomeDominio) {
-
-            resultado.erro = true;
-            resultado.mensagem = `O email falta nome do dominio ou faltando digitos, verifique o email digitado!`;
-
-        } else if (validacao.complementoDominio) {
-
-            resultado.erro = true;
-            resultado.mensagem = `O email faltando ".com" ou similar, verifique o email digitado!`;
-
-        } else if (validacao.arrobaExtra) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Email com "@" excedente, verifique o email digitado!`;
-
-        } else if (validacao.semArroba) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Email sem "@", verifique o email digitado!`;
-
-        } else if (validacao.pontoExtraDominio) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Email com "." excedente, verifique o email digitado!`;
-
-        } else if (validacao.semPontoDominio) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Email sem ".", verifique o email digitado!`;
-
-        } else if (validacao.caracteresInvalidosIdEmail) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Email contém  ${input.caracteresInvalidosIdEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${input.caracteresInvalidosIdEmail} ", verifique o email digitado!`;
-
-        } else if (validacao.caracteresInvalidosDominioEmail) {
-
-            resultado.erro = true;
-            resultado.mensagem = `Domínio do email ${input.caracteresInvalidosDominioEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${input.caracteresInvalidosDominioEmail} ", verifique o email digitado!`;
-
-        } else if (validacao.inicioInvalido) {
-
-            resultado.erro = true;
-            resultado.mensagem = `O email não pode iniciar com "${input.primeiroDigitoEmail}", verifique o email digitado!`;
-
-        } else if (validacao.finalInvalido) {
-
-            resultado.erro = true;
-            resultado.mensagem = `O email não pode terminar com "${input.ultimoDigitoEmail}", verifique o email digitado!`;
-
-        } else if (validacao.caracterConsecutivosDominioEmail) {
-
-            resultado.erro = true;
-            resultado.mensagem = `O email não pode ter apos o "@", "${input.caracterConsecutivosDominioEmail}" consecutivos, verifique o email digitado!`;
-
-        } else if (validacao.caracterConsecutivosIdEmail) {
-
-            resultado.erro = true;
-            resultado.mensagem = `O email não pode ter "${input.caracterConsecutivosIdEmail}" consecutivos, verifique o email digitado!`;
-
+        resultado = {
+            erro: false,
+            mensagem: ""
         };
     };
 
-
     return resultado;
 };
-
-// funções gerais para validar email
 
 function validaInputEmail(inputUser) {
     let resultado = {};

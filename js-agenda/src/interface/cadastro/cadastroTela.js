@@ -1,3 +1,4 @@
-import { iniciarCadastro } from "./cadastroEventos.js";
+import { iniciarCadastro, validaInputsForm } from "./cadastroEventos.js";
 
+validaInputsForm();
 iniciarCadastro();

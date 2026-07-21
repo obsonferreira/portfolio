@@ -1,6 +1,7 @@
-import { elementoAlerta, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
-import { exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
+import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
+import { bloquearBotao, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
 import { processaFormulario, enviarFormulario } from "./cadastroFormulario.js";
+import { validaEntrada } from './../../validadores/validaCampo.js';
 
 export function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
@@ -17,4 +18,18 @@ export function iniciarCadastro() {
     elementoDialogo.botaoFechar.addEventListener("click", () => {
         elementoDialogo.modalCadastro.close();
     });
-}
+};
+
+
+export function validaInputsForm() {
+    elementoCadastro.formulario.addEventListener('input', (evento) => {
+        const campo = evento.target;
+        ocultarErrosValidacao(elementoAlerta);
+        const validacao = validaEntrada(campo);
+        exibirErrosCampos(validacao,elementoAlerta);
+        bloquearBotao(validacao,elementoBotoes);
+        
+
+
+    });
+};

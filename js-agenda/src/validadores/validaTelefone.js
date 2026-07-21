@@ -1,15 +1,15 @@
 import { retornaComposicaoInput } from './analisaTexto.js';
 
-export function validaTelefone(inputUser) {
+export function validaTelefone(input, campo) {
     let resultado = {};
-    let input = retornaComposicaoInput(inputUser);
-    let validacao = validaInputFone(input);
-
-    resultado.telefone = inputUser;
+    const composicao = retornaComposicaoInput(input);
+    const validacao = validaInputFone(composicao);
 
     if (validacao.quantidadeEspaco) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Telefone não pode ter espaço, verifique o telefone digitado!`
         };
@@ -17,6 +17,8 @@ export function validaTelefone(inputUser) {
     } else if (validacao.caracteresInvalidos) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: `Telefone contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
         };
@@ -24,6 +26,8 @@ export function validaTelefone(inputUser) {
     } else if (validacao.tamanhoMenor) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: "Telefone faltando digitos, digite os 9 digitos!"
         };
@@ -31,12 +35,16 @@ export function validaTelefone(inputUser) {
     } else if (validacao.tamanhoMaior) {
 
         resultado = {
+            campo: campo,
+            valor: input,
             erro: true,
             mensagem: "Telefone com muitos digitos, digite apenas 9 digitos!"
         };
 
     } else {
         resultado = {
+            campo: campo,
+            valor: input,
             erro: false,
             mensagem: ""
         };
@@ -45,14 +53,13 @@ export function validaTelefone(inputUser) {
     return resultado;
 };
 
-function validaInputFone(inputUser) {
-    let resultado = {};
+function validaInputFone(composicao) {
 
-    resultado.quantidadeEspaco = inputUser.quantidadeEspaco > 0;
-    resultado.tamanhoMenor = inputUser.numero.length < 9;
-    resultado.tamanhoMaior = inputUser.numero.length > 9;
-    resultado.caracteresInvalidos = inputUser.caracteresEspecial.length > 0 || inputUser.letras.length > 0;
-    resultado.caracteres = inputUser.letras + inputUser.caracteresEspecial;
-
-    return resultado;
+    return {
+        quantidadeEspaco: composicao.quantidadeEspaco > 0,
+        tamanhoMenor: composicao.numero.length < 9,
+        tamanhoMaior: composicao.numero.length > 9,
+        caracteresInvalidos: composicao.caracteresEspecial.length > 0 || composicao.letras.length >,
+        caracteres: composicao.letras + composicao.caracteresEspecial
+    };
 };

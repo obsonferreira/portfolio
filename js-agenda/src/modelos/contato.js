@@ -11,7 +11,7 @@ export class Contato {
 
     validarTelefone() {
 
-        const resultado = validaTelefone(this.telefone);
+        const resultado = validaTelefone(this.telefone,'telefone');
 
         if (resultado.erro) {
 
@@ -26,7 +26,7 @@ export class Contato {
 
     validarEmail() {
 
-        const resultado = validaEmail(this.email);
+        const resultado = validaEmail(this.email, 'email');
 
         if (resultado.erro) {
 

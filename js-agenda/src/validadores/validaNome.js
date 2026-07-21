@@ -46,13 +46,13 @@ export function validaNome(input,campo) {
     return resultado;
 };
 
-function validaInputNome(input) {
+function validaInputNome(composicao) {
 
     return {
-        quantidadeEspaco: input.quantidadeEspaco > 0,
-        tamanho: input.letras.length < 3,
-        caracteresInvalidos: (input.caracteresEspecial.length > 0 || inputUser.numero.length > 0),
-        caracteres: input.numero + input.caracteresEspecial
+        quantidadeEspaco: composicao.quantidadeEspaco > 0,
+        tamanho: composicao.letras.length < 3,
+        caracteresInvalidos: (composicao.caracteresEspecial.length > 0 || composicao.numero.length > 0),
+        caracteres: composicao.numero + composicao.caracteresEspecial
     };
 };
 

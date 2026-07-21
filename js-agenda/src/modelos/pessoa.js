@@ -27,7 +27,7 @@ export class Pessoa {
 
     validarSobrenome() {
 
-        const resultado = validaNome(this.sobrenome);
+        const resultado = validaNome(this.sobrenome,'sobrenome');
 
         if (resultado.erro) {
 

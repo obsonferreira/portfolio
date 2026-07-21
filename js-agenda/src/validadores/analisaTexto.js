@@ -37,3 +37,22 @@ export function retornaComposicaoEmail(input) {
 
     return componentes;
 };
+
+function retornaConsecutivos(inputUser) {
+
+    const caracteresEspecial = /^[\W_.-]$/;
+
+    let iguais = [];
+
+    for (let index = 0; index < inputUser.length; index++) {
+
+        let caracter = inputUser.at(index);
+
+        if (caracter === inputUser.at(index + 1) && caracteresEspecial.test(caracter)) {
+
+            iguais.push(caracter);
+        };
+    };
+
+    return iguais;
+};

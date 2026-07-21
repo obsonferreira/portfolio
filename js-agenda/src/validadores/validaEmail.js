@@ -157,22 +157,3 @@ function validaInputEmail(inputUser) {
         semPontoDominio: inputUser.caracterValidosDominioEmail.length === 0
     };
 };
-
-function retornaConsecutivos(inputUser) {
-
-    const caracteresEspecial = /^[\W_.-]$/;
-
-    let iguais = [];
-
-    for (let index = 0; index < inputUser.length; index++) {
-
-        let caracter = inputUser.at(index);
-
-        if (caracter === inputUser.at(index + 1) && caracteresEspecial.test(caracter)) {
-
-            iguais.push(caracter);
-        };
-    };
-
-    return iguais;
-};

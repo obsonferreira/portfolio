@@ -59,7 +59,7 @@ function validaInputFone(composicao) {
         quantidadeEspaco: composicao.quantidadeEspaco > 0,
         tamanhoMenor: composicao.numero.length < 9,
         tamanhoMaior: composicao.numero.length > 9,
-        caracteresInvalidos: composicao.caracteresEspecial.length > 0 || composicao.letras.length >,
+        caracteresInvalidos: composicao.caracteresEspecial.length > 0 || composicao.letras.length > 0 ,
         caracteres: composicao.letras + composicao.caracteresEspecial
     };
 };

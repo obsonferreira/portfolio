@@ -62,7 +62,7 @@ export function iniciarAgenda() {
         
         if (dados.validacao.contatoValido) {
             editarFormulario(dados);
-        }
+        };
     });
 
     elementoBotoesAgenda.botaoExcluir.addEventListener("click", () => {

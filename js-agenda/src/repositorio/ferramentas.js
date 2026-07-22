@@ -23,11 +23,11 @@ function verificaInput(inputUser) {
 
         };
     };
-    
+
     if (numero === input.length) {
         if (numero.length === 9) {
             return { output: input, numero: true };
-            
+
         } else {
             return { output: parseInt(inputUser), numero: true };
         }
@@ -46,8 +46,7 @@ export function retronaId(input, lista) {
 
     const buscar = verificaInput(input);
     let resultado;
-    console.log(typeof(buscar.output));
-    
+
     if (buscar.numero) {
         const resultadoTelefone = lista.find(usuario => usuario.contato.telefone === buscar.output);
         const resultadoId = lista.find(usuario => usuario.id === buscar.output);

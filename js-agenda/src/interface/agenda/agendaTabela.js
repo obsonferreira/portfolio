@@ -26,7 +26,11 @@ export function criarCelula(texto) {
 }
 
 export function criarBotaoEditar(pessoa) {
+<<<<<<< HEAD
     const td = document.createElement("td");
+=======
+    const td = document.createElement('td');
+>>>>>>> 65ca1b41576e4978183cc0ca6eff8ea992ca3979
     const botao = document.createElement("button");
     botao.classList.add("btn-editar");
     botao.textContent = "Editar";

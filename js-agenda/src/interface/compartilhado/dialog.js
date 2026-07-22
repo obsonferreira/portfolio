@@ -1,7 +1,6 @@
-import { elementoDialogoAlertasAgenda, elementoDialogoAlteracaoAgenda } from "../agenda/elementosAgenda.js";
+import { elementoDialogoAlertasAgenda,elementoAlertaAgenda, elementoDialogoAlteracaoAgenda } from "../agenda/elementosAgenda.js";
 import { elementoDialogo, elementoAlerta } from "../cadastro/elementosCadastro.js";
-import { ocultarAtributo, exibirMensagem } from "./notificacoes.js";
-import { elementoAlertaAgenda } from './../agenda/elementosAgenda.js';
+import { ocultarAtributo, exibirMensagem, exibirAtributo } from "./notificacoes.js";
 
 export function modalContatoSalvo() {
     elementoDialogo.modalCadastro.showModal();
@@ -10,7 +9,7 @@ export function modalContatoSalvo() {
 
 export function mensagemContatoAlterado() {
     elementoDialogoAlteracaoAgenda.modalContato.close();
-    exibirMensagem(elementoAlertaAgenda.mensagemAlteracao,'Contato alterado!');
+    exibirAtributo(elementoDialogoAlteracaoAgenda.mensagemAlteracao);
     elementoDialogoAlertasAgenda.modalAlertas.showModal();
-}
+};
 

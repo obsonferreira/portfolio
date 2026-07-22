@@ -31,11 +31,8 @@ export function deletarContato(referencia) {
 };
 
 export function buscaContato(input) {
-    console.log(input);
     
     let idContato =  retronaId(input, retornaLista());    
-    console.log(typeof(idContato));
-    console.log(idContato);
     
     // if (idContato.erro) {
     //     return { erro: true, mensagem: idContato.mensagem };

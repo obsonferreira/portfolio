@@ -22,7 +22,7 @@ export function iniciarCadastro() {
 
 
 export function validaInputsForm() {
-    elementoCadastro.formulario.addEventListener('input', (evento) => {
+    elementoCadastro.formulario.addEventListener('mouseover', (evento) => {
         const campo = evento.target;
         ocultarErrosValidacao(elementoAlerta);
         const validacao = validaEntrada(campo);

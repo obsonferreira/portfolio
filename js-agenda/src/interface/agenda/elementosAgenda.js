@@ -3,16 +3,20 @@ export const elementoAlertaAgenda = {
     sobrenome: document.getElementById("alerta-sobrenome"),
     telefone: document.getElementById("alerta-telefone"),
     email: document.getElementById("alerta-email"),
-    mensagemExclusao: document.getElementById("container-exclusao"),
+    contato: document.getElementById("alerta-sem-contato")
+
 };
-export const elementoDialogoAlteracaoAgenda = {
-    modalContato: document.getElementById("modal-contato"),
-    mensagemAlteracao: document.getElementById("container-alteracao"),
+
+export const elementoDialogoEdicao = {
+    modalEdicao: document.getElementById("modal-edicao"),
+    botaoExcluir: document.getElementById("btn-excluir"),
+    botaoSair: document.getElementById("btn-sair")
+
 };
 
 export const elementoFormularioAgenda = {
     formulario: document.getElementById("formulario-modal"),
-    botaoEditarForm: document.getElementById("salvar-form"),
+    botaoEditarForm: document.getElementById("salvar-form")
 };
 
 export const elementoDialogoAlertasAgenda = {
@@ -20,23 +24,19 @@ export const elementoDialogoAlertasAgenda = {
     botaoSim: document.getElementById("btn-sim"),
     botaoNao: document.getElementById("btn-nao"),
     botaoSairAlteracao: document.getElementById("btn-sair-alteracao"),
+    mensagemAlteracao: document.getElementById("container-alteracao"),
+    mensagemExclusao: document.getElementById("container-exclusao")
 };
 export const elementoVisorAgenda = {
-    spanContato: document.getElementById("quantidade-contatos"),
-    spanSemContato: document.getElementById("sem-contato"),
-};
-
-export const elementoBotoesAgenda = {
-    botaoExcluir: document.getElementById("btn-excluir"),
-    botaoSair: document.getElementById("btn-sair"),
+    contador: document.getElementById("quantidade-contatos")
 };
 
 export const elementoBuscaAgenda = {
     divBusca: document.getElementById("busca-contato"),
     inputBusca: document.getElementById("input-busca"),
-    botaoBusca: document.getElementById("botao-busca"),
+    botaoBusca: document.getElementById("botao-busca")
 };
 
 export const elementoTabelaAgenda = {
-    tabela: document.getElementById("tabela-contato"),
+    tabela: document.getElementById("tabela-agenda")
 };

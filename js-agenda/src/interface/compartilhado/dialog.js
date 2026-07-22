@@ -12,4 +12,3 @@ export function mensagemContatoAlterado() {
     exibirAtributo(elementoDialogoAlteracaoAgenda.mensagemAlteracao);
     elementoDialogoAlertasAgenda.modalAlertas.showModal();
 };
-

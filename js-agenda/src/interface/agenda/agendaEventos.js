@@ -53,18 +53,6 @@ export function iniciarAgenda() {
         preencheFormulario(elementoFormularioAgenda.formulario, dadosBusca);
     });
 
-    elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
-        event.preventDefault();
-        ocultarErrosValidacao(elementoAlertaAgenda);
-        const dados = processaFormulario(elementoFormularioAgenda);
-        dados.referencia = referencia;
-        exibirErrosValidacao(dados.validacao, elementoAlertaAgenda);
-        
-        if (dados.validacao.contatoValido) {
-            editarFormulario(dados);
-        };
-    });
-
     elementoBotoesAgenda.botaoExcluir.addEventListener("click", () => {
         exibirAtributo(elementoAlertaAgenda.mensagemExclusao);
         elementoDialogoAlteracaoAgenda.modalContato.close();
@@ -75,21 +63,51 @@ export function iniciarAgenda() {
         elementoDialogoAlteracaoAgenda.modalContato.close();
     });
 
+
+
+};
+
+function cancelarAlteracao() {
     elementoDialogoAlertasAgenda.botaoSairAlteracao.addEventListener("click", () => {
         elementoDialogoAlertasAgenda.modalAlertas.close();
         location.reload();
     });
+};
 
+function confirmar() {
     elementoDialogoAlertasAgenda.botaoSim.addEventListener("click", () => {
         deletarContato(referencia);
         location.reload();
     });
+};
 
+function cancelar() {
     elementoDialogoAlertasAgenda.botaoNao.addEventListener("click", () => {
         elementoDialogoAlteracaoAgenda.modalContato.showModal();
         elementoDialogoAlertasAgenda.modalAlertas.close();
     });
+};
 
+function iniciarEdicao() {
+    elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
+        event.preventDefault();
+        ocultarErrosValidacao(elementoAlertaAgenda);
+        const dadosFormulario = processaFormulario(elementoCadastro);
+        const resultado = validaFormulario(dadosFormulario);
+        camposValidos = resultado.validacao.contatoValido;
+        exibirErrosValidacao(resultado.validacao, elementoAlertaAgenda);
+        enviarFormulario(resultado);
+
+        // dados.referencia = referencia;
+
+        if (resultado.validacao.contatoValido) {
+            editarFormulario(resultado);
+        };
+
+    });
+};
+
+function buscarContato() {
     elementoBuscaAgenda.botaoBusca.addEventListener("click", () => {
         const input = elementoBuscaAgenda.inputBusca.value;
         if (input.length <= 0) {
@@ -97,6 +115,6 @@ export function iniciarAgenda() {
             elementoBuscaAgenda.divBusca.appendChild(alertaBusca);
         } else {
             const resultado = buscaContato(input);
-        }
+        };
     });
-}
+};

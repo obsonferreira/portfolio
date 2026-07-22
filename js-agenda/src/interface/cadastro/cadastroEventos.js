@@ -9,13 +9,14 @@ function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        ocultarErrosValidacao(elementoAlerta);
+        // ocultarErrosValidacao(elementoAlerta);
         const dadosFormulario = processaFormulario(elementoCadastro);
         const resultado = validaFormulario(dadosFormulario);
         camposValidos = resultado.validacao.contatoValido;
 
         exibirErrosValidacao(resultado.validacao, elementoAlerta);
         enviarFormulario(resultado);
+        
         if (resultado.validacao.contatoValido) {
             elementoCadastro.formulario.reset();
         }

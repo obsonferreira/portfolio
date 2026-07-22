@@ -42,17 +42,27 @@ export function ocultarErrosValidacao(elemento) {
 };
 
 export function exibirErrosCampos(dados, elementoAlerta) {
+
     if (dados.erro) {
+
         exibirAtributo(elementoAlerta[dados.campo]);
         exibirMensagem(elementoAlerta[dados.campo], dados.mensagem);
+    } else {
+        ocultarAtributo(elementoAlerta[dados.campo]);
     };
 
 };
 
-export function bloquearBotao(validacao,elemento) {
-    if (validacao.erro) {
-        elemento.botaoSubmit.disabled = true;
+export function desbloquearBotao(validacao, elemento) {
+
+    if (validacao) {
+        elemento.botaoSubmit.disabled = false;
     } else {
-        elemento.botaoSubmit.disabled= false;
-    }
-}
+        elemento.botaoSubmit.disabled = true;
+    };
+};
+
+export function bloquearBotao(elemento) {
+
+    elemento.botaoSubmit.disabled = true;
+};

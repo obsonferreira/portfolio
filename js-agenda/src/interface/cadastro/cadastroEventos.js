@@ -1,16 +1,22 @@
 import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
-import { bloquearBotao, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
-import { processaFormulario, enviarFormulario } from "./cadastroFormulario.js";
+import { bloquearBotao, desbloquearBotao, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
+import { processaFormulario, enviarFormulario, validaFormulario, validaCamposObrigatorio } from "./cadastroFormulario.js";
 import { validaEntrada } from './../../validadores/validaCampo.js';
 
-export function iniciarCadastro() {
+let camposValidos = true;
+
+function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
+
         ocultarErrosValidacao(elementoAlerta);
-        const dados = processaFormulario(elementoCadastro);
-        exibirErrosValidacao(dados.validacao, elementoAlerta);
-        if (dados.validacao.contatoValido) {
-            enviarFormulario(dados);
+        const dadosFormulario = processaFormulario(elementoCadastro);
+        const resultado = validaFormulario(dadosFormulario);
+        camposValidos = resultado.validacao.contatoValido;
+
+        exibirErrosValidacao(resultado.validacao, elementoAlerta);
+        if (resultado.validacao.contatoValido) {
+            enviarFormulario(resultado);
             elementoCadastro.formulario.reset();
         }
     });
@@ -20,16 +26,27 @@ export function iniciarCadastro() {
     });
 };
 
+function validaInputsForm() {
 
-export function validaInputsForm() {
-    elementoCadastro.formulario.addEventListener('mouseover', (evento) => {
-        const campo = evento.target;
-        ocultarErrosValidacao(elementoAlerta);
-        const validacao = validaEntrada(campo);
-        exibirErrosCampos(validacao,elementoAlerta);
-        bloquearBotao(validacao,elementoBotoes);
-        
+    bloquearBotao(elementoBotoes);
+    elementoCadastro.formulario.addEventListener('input', () => {
+        const resultado = validaCamposObrigatorio(elementoCadastro.formulario);
+
+        desbloquearBotao(resultado.valido, elementoBotoes);
+        if (camposValidos) {
+            exibirErrosCampos(resultado.nome, elementoAlerta);
+            exibirErrosCampos(resultado.telefone, elementoAlerta);
+            exibirErrosCampos(resultado.email, elementoAlerta);
+        };
+
 
 
     });
+
 };
+
+export function main() {
+    iniciarCadastro();
+    validaInputsForm();
+}
+

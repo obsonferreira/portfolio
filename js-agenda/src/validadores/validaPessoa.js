@@ -1,23 +1,6 @@
 import { buscaContato } from "../repositorio/agendaRepositorio.js";
 import { retronaId } from "../repositorio/ferramentas.js";
-
-function validaContato(validacao) {
-    let contaErros = 0;
-    let dados = Object.values(validacao);
-
-    for (let index = 0; index < dados.length; index++) {
-
-        if (dados[index].erro) {
-            contaErros++;
-        };
-    };
-
-    if (contaErros > 0) {
-        return false;
-    } else {
-        return true;
-    };
-};
+import { validacaoGeral } from "./compartilhado.js";
 
 export function validaPessoa(pessoa) {
     const validacao = {};
@@ -33,7 +16,7 @@ export function validaPessoa(pessoa) {
 
     };
 
-    validacao.contatoValido = validaContato(validacao);
+    validacao.contatoValido = validacaoGeral(validacao);
 
     return validacao;
 

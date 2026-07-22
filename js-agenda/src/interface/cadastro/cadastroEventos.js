@@ -1,6 +1,6 @@
 import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
-import { bloquearBotao, desbloquearBotao, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
-import { processaFormulario, enviarFormulario, validaFormulario, validaCamposObrigatorio } from "./cadastroFormulario.js";
+import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
+import { enviarFormulario } from "./cadastroFormulario.js";
 import { validaEntrada } from './../../validadores/validaCampo.js';
 
 let camposValidos = true;
@@ -15,8 +15,8 @@ function iniciarCadastro() {
         camposValidos = resultado.validacao.contatoValido;
 
         exibirErrosValidacao(resultado.validacao, elementoAlerta);
+        enviarFormulario(resultado);
         if (resultado.validacao.contatoValido) {
-            enviarFormulario(resultado);
             elementoCadastro.formulario.reset();
         }
     });

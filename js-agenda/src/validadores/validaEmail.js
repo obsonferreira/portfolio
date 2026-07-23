@@ -74,7 +74,7 @@ export function validaEmail(input, campo) {
             campo: campo,
             valor: input,
             erro: true,
-            mensagem: `Email contém  ${componentes.caracteresInvalidosIdEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${componentes.caracteresInvalidosIdEmail} ", verifique o email digitado!`
+            mensagem: `Email contém:  ${componentes.caracteresInvalidosIdEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${componentes.caracteresInvalidosIdEmail} ", verifique o email digitado!`
         };
 
     } else if (validacao.caracteresInvalidosDominioEmail) {
@@ -83,7 +83,7 @@ export function validaEmail(input, campo) {
             campo: campo,
             valor: input,
             erro: true,
-            mensagem: `Domínio do email ${componentes.caracteresInvalidosDominioEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${componentes.caracteresInvalidosDominioEmail} ", verifique o email digitado!`
+            mensagem: `Domínio do email contém: ${componentes.caracteresInvalidosDominioEmail.length > 1 ? "digitos inválidos:" : "digito inválido:"} " ${componentes.caracteresInvalidosDominioEmail} ", verifique o email digitado!`
         };
 
     } else if (validacao.inicioInvalido) {
@@ -92,7 +92,7 @@ export function validaEmail(input, campo) {
             campo: campo,
             valor: input,
             erro: true,
-            mensagem: `O email não pode iniciar com "${componentes.primeiroDigitoEmail}", verifique o email digitado!`
+            mensagem: `O email não pode iniciar com: "${componentes.primeiroDigitoEmail}", verifique o email digitado!`
         };
 
     } else if (validacao.finalInvalido) {
@@ -101,7 +101,7 @@ export function validaEmail(input, campo) {
             campo: campo,
             valor: input,
             erro: true,
-            mensagem: `O email não pode terminar com "${componentes.ultimoDigitoEmail}", verifique o email digitado!`
+            mensagem: `O email não pode terminar com: "${componentes.ultimoDigitoEmail}", verifique o email digitado!`
         };
 
     } else if (validacao.caracterConsecutivosDominioEmail) {
@@ -119,7 +119,7 @@ export function validaEmail(input, campo) {
             campo: campo,
             valor: input,
             erro: true,
-            mensagem: `O email não pode ter "${componentes.caracterConsecutivosIdEmail}" consecutivos, verifique o email digitado!`
+            mensagem: `O email não pode ter: "${componentes.caracterConsecutivosIdEmail}" consecutivos, verifique o email digitado!`
         };
 
     } else {

@@ -21,7 +21,7 @@ export function validaNome(input, campo) {
             campo: campo,
             valor: inputMinusculo,
             erro: true,
-            mensagem: `Campo contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
+            mensagem: `Campo contem: "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
         };
 
     } else if (validacao.tamanho) {

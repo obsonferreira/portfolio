@@ -42,49 +42,63 @@ function verificaInput(inputUser) {
 
 };
 
+// export function retronaId(input, lista) {
+
+//     const buscar = verificaInput(input);
+//     let resultado;
+
+//     if (buscar.numero) {
+//         const resultadoTelefone = lista.find(usuario => usuario.contato.telefone === buscar.output);
+//         const resultadoId = lista.find(usuario => usuario.id === buscar.output);
+//         if (resultadoTelefone) {
+//             resultado = resultadoTelefone.id;
+
+//         };
+
+//         if (resultadoId.id) {
+//             resultado = resultadoId.id;
+
+//         };
+
+//     } else if (buscar.nome) {
+//         const resultadoNome = lista.find(usuario => usuario.nome === buscar.output);
+//         const resultadoSobrenome = lista.find(usuario => usuario.sobrenome === buscar.output);
+
+//         if (resultadoNome) {
+
+//             resultado = resultadoNome.id;
+//         };
+
+//         if (resultadoSobrenome) {
+
+//             resultado = resultadoSobrenome.id;
+//         };
+
+//     } else if (buscar.email) {
+//         const resultadoEmail = lista.find(usuario => usuario.contato.email === buscar.output);
+//         if (resultadoEmail) {
+
+//             resultado = resultadoEmail.id;
+//         };
+
+//     } else {
+
+//         return { erro: true, mensagem: 'contato não encontrado!' };
+//     };
+
+//     return resultado;
+// };
+
 export function retronaId(input, lista) {
 
-    const buscar = verificaInput(input);
-    let resultado;
-
-    if (buscar.numero) {
-        const resultadoTelefone = lista.find(usuario => usuario.contato.telefone === buscar.output);
-        const resultadoId = lista.find(usuario => usuario.id === buscar.output);
-        if (resultadoTelefone) {
-            resultado = resultadoTelefone.id;
-
-        };
-
-        if (resultadoId.id) {
-            resultado = resultadoId.id;
-
-        };
-
-    } else if (buscar.nome) {
-        const resultadoNome = lista.find(usuario => usuario.nome === buscar.output);
-        const resultadoSobrenome = lista.find(usuario => usuario.sobrenome === buscar.output);
-
-        if (resultadoNome) {
-
-            resultado = resultadoNome.id;
-        };
-
-        if (resultadoSobrenome) {
-
-            resultado = resultadoSobrenome.id;
-        };
-
-    } else if (buscar.email) {
-        const resultadoEmail = lista.find(usuario => usuario.contato.email === buscar.output);
-        if (resultadoEmail) {
-
-            resultado = resultadoEmail.id;
-        };
-
-    } else {
-
-        return { erro: true, mensagem: 'contato não encontrado!' };
+    // const buscar = verificaInput(input);
+    let resultado = {
+        nome: lista.find(usuario => usuario.nome === input.nome),
+        sobrenome: lista.find(usuario => usuario.sobrenome === input.sobrenome),
+        telefone: lista.find(usuario => usuario.contato.telefone === input.telefone),
+        email: lista.find(usuario => usuario.contato.email === input.email)
     };
+
 
     return resultado;
 };

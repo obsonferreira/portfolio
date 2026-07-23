@@ -60,15 +60,15 @@ export function exibirErrosCampos(dados, elementoAlerta) {
 export function desbloquearBotao(validacao, elemento) {
 
     if (validacao) {
-        elemento.botaoSubmit.disabled = false;
+        elemento.submit.disabled = false;
     } else {
-        elemento.botaoSubmit.disabled = true;
+        elemento.submit.disabled = true;
     };
 };
 
 export function bloquearBotao(elemento) {
 
-    elemento.botaoSubmit.disabled = true;
+    elemento.submit.disabled = true;
 };
 
 export function processaFormulario(elemento) {
@@ -99,5 +99,4 @@ export function validaCamposObrigatorio(dadosFormulario) {
     resultado.valido = validacao;
 
     return resultado;
-
 };

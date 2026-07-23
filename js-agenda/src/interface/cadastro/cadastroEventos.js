@@ -1,7 +1,6 @@
 import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
 import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
 import { enviarFormulario } from "./cadastroFormulario.js";
-import { validaEntrada } from './../../validadores/validaCampo.js';
 
 let camposValidos = true;
 
@@ -15,19 +14,22 @@ function iniciarCadastro() {
         camposValidos = resultado.validacao.contatoValido;
 
         exibirErrosValidacao(resultado.validacao, elementoAlerta);
-        enviarFormulario(resultado);
         
         if (resultado.validacao.contatoValido) {
+            enviarFormulario(resultado);
             elementoCadastro.formulario.reset();
         }
     });
 
+
+};
+function sairMensagem() {
     elementoDialogo.botaoFechar.addEventListener("click", () => {
         elementoDialogo.modalCadastro.close();
     });
 };
 
-function validaInputsForm() {
+function validaCamposFormulario() {
 
     bloquearBotao(elementoBotoes);
     elementoCadastro.formulario.addEventListener('input', () => {
@@ -39,15 +41,12 @@ function validaInputsForm() {
             exibirErrosCampos(resultado.telefone, elementoAlerta);
             exibirErrosCampos(resultado.email, elementoAlerta);
         };
-
-
-
     });
-
 };
 
 export function main() {
     iniciarCadastro();
-    validaInputsForm();
+    validaCamposFormulario();
+    sairMensagem();
 }
 

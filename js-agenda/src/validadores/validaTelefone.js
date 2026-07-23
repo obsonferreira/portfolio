@@ -20,7 +20,7 @@ export function validaTelefone(input, campo) {
             campo: campo,
             valor: input,
             erro: true,
-            mensagem: `Telefone contem "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
+            mensagem: `Telefone contem: "${validacao.caracteres}", ${(validacao.caracteres.length === 1) ? "digito invalido" : "digitos invalidos"}!`
         };
 
     } else if (validacao.tamanhoMenor) {

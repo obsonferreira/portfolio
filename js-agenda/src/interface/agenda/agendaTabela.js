@@ -46,3 +46,8 @@ export function criarTabelaContato(lista) {
     });
     return corpo;
 };
+
+function retornaDadosTabela(elemento) {
+    
+    const dadosTabela = Array.from(elemento.tabela)
+}

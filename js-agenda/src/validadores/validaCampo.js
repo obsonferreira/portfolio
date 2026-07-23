@@ -17,7 +17,7 @@ export function validaEntrada(campo) {
             campo: campo.name,
             valor:campo.value,
             erro: true,
-            mensagem: `Tamanho máximo atingido, digite um ${campo.nome} válido!`
+            mensagem: `Tamanho máximo atingido, digite um ${campo.name} válido!`
         };
     } else {
         return {

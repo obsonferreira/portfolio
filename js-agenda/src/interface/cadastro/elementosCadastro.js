@@ -19,5 +19,5 @@ export const elementoDialogo = {
 };
 
 export const elementoBotoes = {
-    botaoSubmit: document.getElementById('botao-formulario')
+    submit: document.getElementById('botao-formulario')
 };

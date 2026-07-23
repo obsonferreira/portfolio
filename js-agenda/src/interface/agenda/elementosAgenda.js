@@ -16,7 +16,7 @@ export const elementoDialogoEdicao = {
 
 export const elementoFormularioAgenda = {
     formulario: document.getElementById("formulario-modal"),
-    botaoEditarForm: document.getElementById("salvar-form")
+    submit: document.getElementById("salvar-form")
 };
 
 export const elementoDialogoAlertasAgenda = {

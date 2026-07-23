@@ -1,70 +1,60 @@
 import { ocultarAtributo, exibirAtributo, exibirMensagem } from "./../compartilhado/notificacoes.js";
-import { exibirErrosValidacao, ocultarErrosValidacao } from "./../compartilhado/formulario.js";
-import { elementoTabelaAgenda, elementoBotoesAgenda, elementoDialogoAlertasAgenda, elementoBuscaAgenda } from "./elementosAgenda.js";
-import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoAlteracaoAgenda, elementoFormularioAgenda } from "./elementosAgenda.js";
-import { editarFormulario, processaFormulario } from "./agendaFormulario.js";
+import { exibirErrosValidacao, ocultarErrosValidacao, processaFormulario } from "./../compartilhado/formulario.js";
+import { elementoTabelaAgenda, elementoDialogoAlertasAgenda, elementoBuscaAgenda } from "./elementosAgenda.js";
+import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoEdicao, elementoFormularioAgenda } from "./elementosAgenda.js";
+import { editarFormulario } from "./agendaFormulario.js";
 import { retornaLista } from "../../repositorio/agendaRepositorio.js";
-import { criarBotaoEditar, criarCelula, preencheFormulario } from "./agendaTabela.js";
+import { preencheFormulario, criarTabelaContato } from "./agendaTabela.js";
 import { alertaBuscaContato } from "../compartilhado/dom.js";
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 
+let referencia;
 export function iniciarAgenda() {
     const lista = retornaLista();
-    let referencia;
 
     document.addEventListener("DOMContentLoaded", () => {
-        const corpo = document.createElement("tbody");
-
         let quantidadeContatos = lista.length;
 
-        elementoVisorAgenda.spanContato.textContent = `${quantidadeContatos > 0 ? "Contatos" : "Contato"} salvo: ${quantidadeContatos}`;
+        elementoVisorAgenda.contador.textContent = `${quantidadeContatos > 0 ? "Contatos" : "Contato"} salvo: ${quantidadeContatos}`;
 
         if (quantidadeContatos === 0) {
-            elementoVisorAgenda.spanSemContato.removeAttribute("hidden");
-            elementoVisorAgenda.spanSemContato.textContent = "Agenda vazia!";
+            exibirAtributo(elementoAlertaAgenda.contato);
+            exibirMensagem(elementoAlertaAgenda.contato, "Agenda vazia!");
         } else {
-            elementoVisorAgenda.spanSemContato.setAttribute("hidden", "");
-
-            lista.forEach((pessoa) => {
-                const valorLinha = document.createElement("tr");
-                valorLinha.classList.add(lista.indexOf(pessoa) + 1);
-
-                valorLinha.appendChild(criarCelula(lista.indexOf(pessoa) + 1));
-                valorLinha.appendChild(criarCelula(pessoa.nome));
-                valorLinha.appendChild(criarCelula(pessoa.sobrenome));
-
-                [pessoa.contato].forEach((contatos) => {
-                    valorLinha.appendChild(criarCelula(contatos.telefone));
-                    valorLinha.appendChild(criarCelula(contatos.email));
-                });
-
-                valorLinha.appendChild(criarBotaoEditar(pessoa.id));
-                corpo.appendChild(valorLinha);
-            });
-            elementoTabelaAgenda.tabela.appendChild(corpo);
+            ocultarAtributo(elementoAlertaAgenda.contato);
+            const tabela = criarTabelaContato(lista);
+            elementoTabelaAgenda.tabela.appendChild(tabela);
         }
     });
 
+};
+
+export function editarContatoAgenda() {
     elementoTabelaAgenda.tabela.addEventListener("click", (event) => {
         event.preventDefault();
+        const click = event.target.tagName;
+        if (click === 'BUTTON') {
+            const dadosBusca = event.target.getAttribute("data-pessoa");
+            referencia = parseInt(dadosBusca);
+            preencheFormulario(elementoFormularioAgenda.formulario, dadosBusca);
+        }
 
-        const dadosBusca = event.target.getAttribute("data-pessoa");
-        referencia = parseInt(dadosBusca);
-        preencheFormulario(elementoFormularioAgenda.formulario, dadosBusca);
     });
+};
 
-    elementoBotoesAgenda.botaoExcluir.addEventListener("click", () => {
+function excluirContatoAgenda() {
+
+    elementoDialogoEdicao.botaoExcluir.addEventListener("click", () => {
         exibirAtributo(elementoAlertaAgenda.mensagemExclusao);
-        elementoDialogoAlteracaoAgenda.modalContato.close();
+        elementoDialogoEdicao.modalEdicao.close();
         elementoDialogoAlertasAgenda.modalAlertas.showModal();
     });
+};
 
-    elementoBotoesAgenda.botaoSair.addEventListener("click", () => {
-        elementoDialogoAlteracaoAgenda.modalContato.close();
+function sairEdicao() {
+    elementoDialogoEdicao.botaoSair.addEventListener("click", () => {
+        elementoDialogoEdicao.modalEdicao.close();
     });
-
-
-
 };
 
 function cancelarAlteracao() {
@@ -83,7 +73,7 @@ function confirmar() {
 
 function cancelar() {
     elementoDialogoAlertasAgenda.botaoNao.addEventListener("click", () => {
-        elementoDialogoAlteracaoAgenda.modalContato.showModal();
+        elementoDialogoEdicao.modalEdicao.showModal();
         elementoDialogoAlertasAgenda.modalAlertas.close();
     });
 };
@@ -117,4 +107,15 @@ function buscarContato() {
             const resultado = buscaContato(input);
         };
     });
+};
+
+export function mainAgenda() {
+    iniciarAgenda();
+    editarContatoAgenda();
+    excluirContatoAgenda();
+    cancelarAlteracao();
+    confirmar();
+    cancelar();
+    iniciarEdicao();
+    buscarContato();
 };

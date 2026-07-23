@@ -1,3 +1,3 @@
-import { iniciarAgenda } from './agendaEventos.js';
+import { mainAgenda } from './agendaEventos.js';
 
-iniciarAgenda();
+mainAgenda();

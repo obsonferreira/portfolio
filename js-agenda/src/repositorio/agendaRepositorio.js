@@ -2,7 +2,6 @@
 // atualizar contatos e remover contatos
 
 import { agendaRepositorio } from "../modelos/agenda.js";
-import { retronaId } from "./ferramentas.js";
 
 agendaRepositorio.contatos = carregarContatos();
 
@@ -31,17 +30,10 @@ export function deletarContato(referencia) {
 };
 
 export function buscaContato(input) {
-    
-    let idContato =  retronaId(input, retornaLista());    
-    
-    // if (idContato.erro) {
-    //     return { erro: true, mensagem: idContato.mensagem };
-    // };
 
-    let dadoBusca = agendaRepositorio.buscar(idContato);
-    
-    return dadoBusca;
+    let idContato = retronaId(input);
 
+    return agendaRepositorio.buscar(idContato);
 };
 
 export function carregarContatos() {
@@ -61,4 +53,23 @@ export function carregarContatos() {
 export function retornaLista() {
 
     return agendaRepositorio.listar();
+};
+
+export function listaId(input) {
+
+    const lista = agendaRepositorio.listar();
+    return {
+        nome: lista.find(usuario => usuario.nome === input.nome).id,
+        sobrenome: lista.find(usuario => usuario.sobrenome === input.sobrenome).id,
+        telefone: lista.find(usuario => usuario.contato.telefone === input.telefone).id,
+        email: lista.find(usuario => usuario.contato.email === input.email).id
+    };
+
+};
+
+function retronaId(input) {
+    const id = new Set(Object.values(listaId(input)));
+    const idConvertido = id.values();
+
+    return idConvertido.next().value;
 };

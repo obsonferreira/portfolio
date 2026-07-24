@@ -5,7 +5,7 @@ import { elementoTabelaAgenda, elementoDialogoAlertasAgenda, elementoBuscaAgenda
 import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoEdicao, elementoFormularioAgenda } from "./elementosAgenda.js";
 import { editarFormulario } from "./agendaFormulario.js";
 import { deletarContato, retornaLista } from "../../repositorio/agendaRepositorio.js";
-import { preencheFormulario, criarTabelaContato } from "./agendaTabela.js";
+import { preencheFormulario, criarTabelaContato, retornaDadosTabela } from "./agendaTabela.js";
 import { alertaBuscaContato } from "../compartilhado/dom.js";
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 
@@ -53,14 +53,13 @@ function editarContatoAgenda() {
     elementoTabelaAgenda.tabela.addEventListener("click", (event) => {
         event.preventDefault();
         const click = event.target;
-        console.log(click);
-        
-        
+
         if (click.tagName === 'BUTTON') {
             // const dadosBusca = click.getAttribute("data-pessoa");
-            const dadosBusca = click.closest('tr');
+            const linhaTabela = click.closest('tr');
+            const dados = retornaDadosTabela(linhaTabela)
             // referencia = parseInt(dadosBusca);
-            preencheFormulario(elementoFormularioAgenda.formulario, dadosBusca);
+            preencheFormulario(elementoFormularioAgenda.formulario, dados);
         };
 
     });

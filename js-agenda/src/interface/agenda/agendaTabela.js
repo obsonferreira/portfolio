@@ -1,6 +1,6 @@
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 import { elementoDialogoEdicao, elementoTabelaAgenda } from "./elementosAgenda.js";
-import { criarBotaoEditar} from "../compartilhado/dom.js";
+import { criarBotaoEditar } from "../compartilhado/dom.js";
 
 export function preencheFormulario(formulario, dadosBusca) {
     const dados = buscaContato(dadosBusca);
@@ -8,6 +8,7 @@ export function preencheFormulario(formulario, dadosBusca) {
         if (formulario.elements[chave]) {
             formulario.elements[chave].value = dados[chave];
         };
+        
         if (chave === "contato") {
             for (const contato in dados.contato) {
                 if (formulario.elements[contato]) {
@@ -16,7 +17,7 @@ export function preencheFormulario(formulario, dadosBusca) {
             };
         };
     };
-    retornaDadosTabela(elementoTabelaAgenda.tabela);
+
     elementoDialogoEdicao.modalEdicao.showModal();
 };
 
@@ -47,15 +48,21 @@ export function criarTabelaContato(lista) {
     return corpo;
 };
 
-function retornaDadosTabela(elemento) {
-    
-    const cabecalho = elemento.querySelectorAll('tr');
-    const valorCabecalho = Array.from(cabecalho).map(linha => {
-        const celulas = linha.querySelectorAll("td");
-        console.log(celulas[1].getElementsByTagName("td").value)
-        
-        
+export function retornaDadosTabela(elemento) {
 
+    const celulas = elemento.getElementsByTagName("td");
+    const valorCelula = Array.from(celulas).map(dados => {
+        const valor = dados?.innerText.trim();
+        return valor;
     });
-    
+    valorCelula.shift();
+    valorCelula.pop();
+
+
+    return {
+        nome: valorCelula[0],
+        sobrenome: valorCelula[1],
+        telefone: valorCelula[2],
+        email: valorCelula[3]
+    };
 };

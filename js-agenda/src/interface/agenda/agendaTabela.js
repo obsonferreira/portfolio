@@ -8,7 +8,7 @@ export function preencheFormulario(formulario, dadosBusca) {
         if (formulario.elements[chave]) {
             formulario.elements[chave].value = dados[chave];
         };
-        
+
         if (chave === "contato") {
             for (const contato in dados.contato) {
                 if (formulario.elements[contato]) {
@@ -19,6 +19,7 @@ export function preencheFormulario(formulario, dadosBusca) {
     };
 
     elementoDialogoEdicao.modalEdicao.showModal();
+    return dados.id
 };
 
 function criarCelula(texto) {
@@ -62,7 +63,9 @@ export function retornaDadosTabela(elemento) {
     return {
         nome: valorCelula[0],
         sobrenome: valorCelula[1],
-        telefone: valorCelula[2],
-        email: valorCelula[3]
+        contato: {
+            telefone: valorCelula[2],
+            email: valorCelula[3]
+        }
     };
 };

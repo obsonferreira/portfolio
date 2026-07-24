@@ -24,8 +24,8 @@ export function validaPessoa(pessoa) {
 export function verificaDuplicidade(pessoa) {
 
     const resultadoBusca = listaId(pessoa);
-
-
+    
+    console.log(resultadoBusca);
 };
     
 // export function verificaDuplicidade(pessoa) {

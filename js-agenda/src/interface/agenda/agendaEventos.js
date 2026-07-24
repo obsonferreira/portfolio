@@ -38,9 +38,9 @@ function iniciarEdicao() {
         ocultarErrosValidacao(elementoAlertaAgenda);
         const dadosFormulario = processaFormulario(elementoFormularioAgenda);
         const resultado = validaFormulario(dadosFormulario);
+        resultado.referencia = referencia        
         camposValidos = resultado.validacao.contatoValido;
         exibirErrosValidacao(resultado.validacao, elementoAlertaAgenda);
-        resultado.referencia = referencia;
 
         if (resultado.validacao.contatoValido) {
             editarFormulario(resultado);
@@ -55,11 +55,9 @@ function editarContatoAgenda() {
         const click = event.target;
 
         if (click.tagName === 'BUTTON') {
-            // const dadosBusca = click.getAttribute("data-pessoa");
             const linhaTabela = click.closest('tr');
             const dados = retornaDadosTabela(linhaTabela)
-            // referencia = parseInt(dadosBusca);
-            preencheFormulario(elementoFormularioAgenda.formulario, dados);
+            referencia = preencheFormulario(elementoFormularioAgenda.formulario, dados);
         };
 
     });

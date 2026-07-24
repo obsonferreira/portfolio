@@ -61,13 +61,13 @@ export function listaId(input) {
     return {
         nome: lista.find(usuario => usuario.nome === input.nome).id,
         sobrenome: lista.find(usuario => usuario.sobrenome === input.sobrenome).id,
-        telefone: lista.find(usuario => usuario.contato.telefone === input.telefone).id,
-        email: lista.find(usuario => usuario.contato.email === input.email).id
+        telefone: lista.find(usuario => usuario.contato.telefone === input.contato.telefone).id,
+        email: lista.find(usuario => usuario.contato.email === input.contato.email).id
     };
-
 };
 
 function retronaId(input) {
+
     const id = new Set(Object.values(listaId(input)));
     const idConvertido = id.values();
 

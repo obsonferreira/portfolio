@@ -72,14 +72,18 @@ export function bloquearBotao(elemento) {
 };
 
 export function processaFormulario(elemento) {
+    
     const formData = new FormData(elemento.formulario);
     const dadosObjeto = Object.fromEntries(formData.entries());
     return criarPessoa(dadosObjeto);
 };
 
 export function validaFormulario(pessoa) {
+
     const validacao = validaPessoa(pessoa);
-    // const contatoExistente = verificaDuplicidade(pessoa);
+    const contatoExistente = verificaDuplicidade(pessoa);
+    console.log(contatoExistente);
+
     const dados = {
         pessoa: pessoa,
         validacao: validacao

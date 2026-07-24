@@ -24,6 +24,11 @@ export function validaPessoa(pessoa) {
 export function verificaDuplicidade(pessoa) {
 
     const resultadoBusca = listaId(pessoa);
+    if (condition) {
+        
+    } else {
+        
+    }
     
     console.log(resultadoBusca);
 };

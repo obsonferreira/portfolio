@@ -82,7 +82,6 @@ export function validaFormulario(pessoa) {
 
     const validacao = validaPessoa(pessoa);
     const contatoExistente = verificaDuplicidade(pessoa);
-    console.log(contatoExistente);
 
     const dados = {
         pessoa: pessoa,

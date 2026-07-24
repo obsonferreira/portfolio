@@ -90,7 +90,10 @@ function verificaInput(inputUser) {
 // };
 
 export function retronaId(input, lista) {
+    console.log(input);
 
+    const celula = input.querySelectorAll("td");
+    console.log(celula);
     // const buscar = verificaInput(input);
     let resultado = {
         nome: lista.find(usuario => usuario.nome === input.nome),

@@ -38,5 +38,6 @@ export const elementoBuscaAgenda = {
 };
 
 export const elementoTabelaAgenda = {
-    tabela: document.getElementById("tabela-agenda")
+    tabela: document.getElementById("tabela-agenda"),
+    cabecalho: document.getElementById('cabecalho')
 };

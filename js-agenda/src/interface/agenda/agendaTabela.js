@@ -1,5 +1,5 @@
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
-import { elementoDialogoEdicao } from "./elementosAgenda.js";
+import { elementoDialogoEdicao, elementoTabelaAgenda } from "./elementosAgenda.js";
 import { criarBotaoEditar} from "../compartilhado/dom.js";
 
 export function preencheFormulario(formulario, dadosBusca) {
@@ -16,7 +16,7 @@ export function preencheFormulario(formulario, dadosBusca) {
             };
         };
     };
-
+    retornaDadosTabela(elementoTabelaAgenda.tabela);
     elementoDialogoEdicao.modalEdicao.showModal();
 };
 
@@ -49,5 +49,13 @@ export function criarTabelaContato(lista) {
 
 function retornaDadosTabela(elemento) {
     
-    const dadosTabela = Array.from(elemento.tabela)
-}
+    const cabecalho = elemento.querySelectorAll('tr');
+    const valorCabecalho = Array.from(cabecalho).map(linha => {
+        const celulas = linha.querySelectorAll("td");
+        console.log(celulas[1].getElementsByTagName("td").value)
+        
+        
+
+    });
+    
+};

@@ -24,14 +24,14 @@ export function editarContato(dados, validacao, parametro) {
 };
 
 export function deletarContato(referencia) {
-    const contatoExcluir = buscaContato(referencia)
-    agendaRepositorio.excluir(contatoExcluir);
+
+    agendaRepositorio.excluir(referencia);
     localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
 };
 
 export function buscaContato(input) {
 
-    let idContato = retronaId(input);
+    let idContato = retornaId(input);
 
     return agendaRepositorio.buscar(idContato);
 };
@@ -55,29 +55,18 @@ export function retornaLista() {
     return agendaRepositorio.listar();
 };
 
-export function listaId(input) {
-
+function retornaId(input) {
     const lista = agendaRepositorio.listar();
 
-    return {
-        nome: lista.find(usuario => usuario.nome === input.nome),
-        sobrenome: lista.find(usuario => usuario.sobrenome === input.sobrenome),
-        telefone: lista.find(usuario => usuario.contato.telefone === input.contato.telefone),
-        email: lista.find(usuario => usuario.contato.email === input.contato.email)
-    };
-};
-
-function retronaId(input) {
-    const dadosId = listaId(input);
-    const conversao = {
-        nome: dadosId.nome.id,
-        sobrenome: dadosId.sobrenome.id,
-        telefone: dadosId.telefone.id,
-        email: dadosId.email.id
+    const dadosId = {
+        nome: lista.find(usuario => usuario.nome === input.nome).id,
+        sobrenome: lista.find(usuario => usuario.sobrenome === input.sobrenome).id,
+        telefone: lista.find(usuario => usuario.contato.telefone === input.contato.telefone).id,
+        email: lista.find(usuario => usuario.contato.email === input.contato.email).id
     };
 
-    const id = new Set(Object.values(conversao));
-    const idConvertido = id.values();
+    const idLista = new Set(Object.values(dadosId));
+    const id = idLista.values();
 
-    return idConvertido.next().value;
+    return id.next().value;
 };

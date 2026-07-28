@@ -24,21 +24,28 @@ export class Agenda {
 
         let pessoa = this.contatos.find(usuario => usuario.id === referencia);
 
-        const novaPessoa = atualizarPessoa(pessoa,dados);
+        const novaPessoa = atualizarPessoa(pessoa, dados);
         Object.assign(pessoa, novaPessoa);
     };
 
-    buscar(referencia){
+    buscar(referencia) {
 
         return this.contatos.find(usuario => usuario.id === referencia);
     };
 
-    excluir(referencia){
+    excluir(referencia) {
+        let index;
 
-        const index = this.contatos.indexOf(referencia);
-        
+        this.contatos.forEach((pessoa) => {
+
+            if (pessoa.id === referencia) {
+                index = this.contatos.indexOf(pessoa);
+            };
+
+        });
+
         if (index > -1) {
-            this.contatos.splice(index,1);
+            this.contatos.splice(index, 1);
         };
     };
 };

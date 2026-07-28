@@ -38,11 +38,14 @@ function iniciarEdicao() {
         ocultarErrosValidacao(elementoAlertaAgenda);
         const dadosFormulario = processaFormulario(elementoFormularioAgenda);
         const resultado = validaFormulario(dadosFormulario);
-        resultado.referencia = referencia        
-        camposValidos = resultado.validacao.contatoValido;
+        resultado.referencia = referencia
+        camposValidos = resultado.validacao.contatoValido && resultado.duplicidade.contatoValido;
+        console.log(resultado.);
+        
         exibirErrosValidacao(resultado.validacao, elementoAlertaAgenda);
+        exibirErrosValidacao(resultado.duplicidade, elementoAlertaAgenda);
 
-        if (resultado.validacao.contatoValido) {
+        if (resultado.validacao.contatoValido && resultado.duplicidade.contatoValido) {
             editarFormulario(resultado);
         };
 

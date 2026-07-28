@@ -1,4 +1,6 @@
-export function validaDuplicidade(input,lista) {
+import { validacaoGeral } from "./compartilhado.js";
+
+export function validaDuplicidade(input, lista) {
     const resultado = {};
     const dadosBusca = {
         nome: lista.some(usuario => usuario.nome === input.nome),
@@ -6,33 +8,30 @@ export function validaDuplicidade(input,lista) {
         telefone: lista.some(usuario => usuario.contato.telefone === input.contato.telefone),
         email: lista.some(usuario => usuario.contato.email === input.contato.email)
     };
-    console.log(dadosBusca);
-    console.log(input);
 
     if (dadosBusca.nome) {
-        resultado.nome = { dado: input.nome, id: lista.find(usuario => usuario.nome === input.nome).id, erro: dadosBusca.nome, mensagem: "Nome existente!" };
+        resultado.nome = { campo: 'nome', valor: input.nome, id: lista.find(usuario => usuario.nome === input.nome).id, erro: dadosBusca.nome, mensagem: "Nome existente!" };
     } else {
-        resultado.nome = { dado: '', id: '', erro: dadosBusca.nome, mensagem: "" };
+        resultado.nome = { campo: 'nome', valor: '', id: '', erro: dadosBusca.nome, mensagem: "" };
     };
-
     if (dadosBusca.sobrenome) {
-        resultado.sobrenome = { dado: input.sobrenome, id: lista.find(usuario => usuario.sobrenome === input.sobrenome).id, erro: dadosBusca.sobrenome, mensagem: "sobrenome existente!" };
+        resultado.sobrenome = { campo: 'sobrenome', valor: input.sobrenome, id: lista.find(usuario => usuario.sobrenome === input.sobrenome).id, erro: dadosBusca.sobrenome, mensagem: "Sobrenome existente!" };
     } else {
-        resultado.sobrenome = { dado: '', id: '', erro: dadosBusca.sobrenome, mensagem: "" };
+        resultado.sobrenome = { campo: 'sobrenome', valor: '', id: '', erro: dadosBusca.sobrenome, mensagem: "" };
     };
-
     if (dadosBusca.telefone) {
-        resultado.telefone = { dado: input.contato.telefone, id: lista.find(usuario => usuario.contato.telefone === input.contato.telefone).id, erro: dadosBusca.telefone, mensagem: "telefone existente!" };
+        resultado.telefone = { campo: 'telefone', valor: input.contato.telefone, id: lista.find(usuario => usuario.contato.telefone === input.contato.telefone).id, erro: dadosBusca.telefone, mensagem: "telefone existente!" };
     } else {
-        resultado.telefone = { dado: '', id: '', erro: dadosBusca.telefone, mensagem: "" };
+        resultado.telefone = { campo: 'telefone', valor: '', id: '', erro: dadosBusca.telefone, mensagem: "" };
     };
 
     if (dadosBusca.email) {
-        resultado.email = { dado: input.contato.email, id: lista.find(usuario => usuario.contato.email === input.contato.email).id, erro: dadosBusca.email, mensagem: "email existente!" };
+        resultado.email = { campo: 'email', valor: input.contato.email, id: lista.find(usuario => usuario.contato.email === input.contato.email).id, erro: dadosBusca.email, mensagem: "email existente!" };
     } else {
-        resultado.email = { dado: '', id: '', erro: dadosBusca.email, mensagem: "" };
+        resultado.email = { campo: 'email', valor: '', id: '', erro: dadosBusca.email, mensagem: "" };
     };
+    resultado.contatoValido = validacaoGeral(resultado);
 
     return resultado;
-    
+
 };

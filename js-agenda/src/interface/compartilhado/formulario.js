@@ -5,7 +5,7 @@ import { validaEntrada } from "../../validadores/validaCampo.js";
 import { validacaoGeral } from './../../validadores/compartilhado.js';
 
 export function exibirErrosValidacao(validacao, elementoAlerta) {
-
+    
     if (validacao.nome.erro) {
         exibirAtributo(elementoAlerta.nome);
         exibirMensagem(elementoAlerta.nome, validacao.nome.mensagem);
@@ -26,16 +26,6 @@ export function exibirErrosValidacao(validacao, elementoAlerta) {
         exibirMensagem(elementoAlerta.email, validacao.email.mensagem);
     };
 
-    // if (!contatoExistente.contatoValido) {
-    //     modal.showModal();
-    //     if (contatoExistente.email.erro) {
-    //         alertaEmailExistente.innerHTML = contatoExistente.email.mensagem;
-
-    //     };
-    //     if (contatoExistente.telefone.erro) {
-    //         alertaTelefoneExistente.innerHTML = contatoExistente.telefone.mensagem;
-    //     };
-    // };
 };
 
 export function ocultarErrosValidacao(elemento) {
@@ -85,7 +75,8 @@ export function validaFormulario(pessoa) {
 
     const dados = {
         pessoa: pessoa,
-        validacao: validacao
+        validacao: validacao,
+        duplicidade: contatoExistente
     };
 
     return dados;

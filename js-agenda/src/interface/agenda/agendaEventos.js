@@ -3,11 +3,12 @@ import { exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao, process
 import { bloquearBotao, desbloquearBotao, validaCamposObrigatorio } from "./../compartilhado/formulario.js";
 import { elementoTabelaAgenda, elementoDialogoAlertasAgenda, elementoBuscaAgenda } from "./elementosAgenda.js";
 import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoEdicao, elementoFormularioAgenda } from "./elementosAgenda.js";
-import { editarFormulario } from "./agendaFormulario.js";
+import { editarFormulario, verificaEdicao } from "./agendaFormulario.js";
 import { deletarContato, retornaLista } from "../../repositorio/agendaRepositorio.js";
 import { preencheFormulario, criarTabelaContato, retornaDadosTabela } from "./agendaTabela.js";
 import { alertaBuscaContato } from "../compartilhado/dom.js";
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
+import { mensagemContatoAlterado } from "../compartilhado/dialog.js";
 
 let referencia;
 let camposValidos = true;
@@ -39,14 +40,23 @@ function iniciarEdicao() {
         const dadosFormulario = processaFormulario(elementoFormularioAgenda);
         const resultado = validaFormulario(dadosFormulario);
         resultado.referencia = referencia
-        camposValidos = resultado.validacao.contatoValido && resultado.duplicidade.contatoValido;
-        console.log(resultado.);
-        
+        const formularioEditado = verificaEdicao(resultado);
+        camposValidos = resultado.validacao.contatoValido && !formularioEditado;
+        console.log(resultado);
+
         exibirErrosValidacao(resultado.validacao, elementoAlertaAgenda);
         exibirErrosValidacao(resultado.duplicidade, elementoAlertaAgenda);
+        if (!formularioEditado) {
 
-        if (resultado.validacao.contatoValido && resultado.duplicidade.contatoValido) {
-            editarFormulario(resultado);
+            if (resultado.validacao.contatoValido) {
+                mensagemContatoAlterado();
+
+            };
+        } else {
+            if (resultado.validacao.contatoValido && resultado.duplicidade.contatoValido) {
+                editarFormulario(resultado);
+                mensagemContatoAlterado();
+            };
         };
 
     });

@@ -3,45 +3,30 @@ import { criarPessoa } from "../../servicos/agendaService.js";
 import { validaPessoa, verificaDuplicidade } from "../../validadores/validaPessoa.js";
 import { validaEntrada } from "../../validadores/validaCampo.js";
 import { validacaoGeral } from './../../validadores/compartilhado.js';
+import { elementoAlerta } from "../cadastro/elementosCadastro.js";
 
 export function exibirErrosValidacao(validacao, elementoAlerta) {
+    console.log(validacao);
     
-    if (validacao.nome.erro) {
-        exibirAtributo(elementoAlerta.nome);
-        exibirMensagem(elementoAlerta.nome, validacao.nome.mensagem);
+    for (const chave in validacao) {
+        
+        if (chave !== "valido" || chave !== "contatoValido") {
+            
+            console.log(chave);
+            console.log(validacao[chave]);
+            if (validacao[chave]) {
+                exibirErrosCampos(validacao[chave], elementoAlerta);
+            };
+        };
+
     };
-
-    if (validacao.sobrenome.erro) {
-        exibirAtributo(elementoAlerta.sobrenome);
-        exibirMensagem(elementoAlerta.sobrenome, validacao.sobrenome.mensagem);
-    };
-
-    if (validacao.telefone.erro) {
-        exibirAtributo(elementoAlerta.telefone);
-        exibirMensagem(elementoAlerta.telefone, validacao.telefone.mensagem);
-    };
-
-    if (validacao.email.erro) {
-        exibirAtributo(elementoAlerta.email);
-        exibirMensagem(elementoAlerta.email, validacao.email.mensagem);
-    };
-
-};
-
-export function ocultarErrosValidacao(elemento) {
-    ocultarAtributo(elemento.nome);
-    ocultarAtributo(elemento.sobrenome);
-    ocultarAtributo(elemento.telefone);
-    ocultarAtributo(elemento.email);
 };
 
 export function exibirErrosCampos(dados, elementoAlerta) {
-
     if (dados.erro) {
-
         exibirAtributo(elementoAlerta[dados.campo]);
         exibirMensagem(elementoAlerta[dados.campo], dados.mensagem);
-    } else {
+    }else{
         ocultarAtributo(elementoAlerta[dados.campo]);
     };
 
@@ -62,7 +47,7 @@ export function bloquearBotao(elemento) {
 };
 
 export function processaFormulario(elemento) {
-    
+
     const formData = new FormData(elemento.formulario);
     const dadosObjeto = Object.fromEntries(formData.entries());
     return criarPessoa(dadosObjeto);
@@ -70,16 +55,12 @@ export function processaFormulario(elemento) {
 
 export function validaFormulario(pessoa) {
 
-    const validacao = validaPessoa(pessoa);
-    const contatoExistente = verificaDuplicidade(pessoa);
+    return validaPessoa(pessoa);
+};
 
-    const dados = {
-        pessoa: pessoa,
-        validacao: validacao,
-        duplicidade: contatoExistente
-    };
+export function validaDuplicidadeFormulario(pessoa) {
 
-    return dados;
+    return verificaDuplicidade(pessoa);
 };
 
 export function validaCamposObrigatorio(dadosFormulario) {

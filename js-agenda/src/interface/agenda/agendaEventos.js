@@ -1,5 +1,5 @@
 import { ocultarAtributo, exibirAtributo, exibirMensagem } from "./../compartilhado/notificacoes.js";
-import { exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao, processaFormulario, validaFormulario } from "./../compartilhado/formulario.js";
+import { exibirErrosCampos, exibirErrosValidacao, processaFormulario, validaDuplicidadeFormulario, validaFormulario } from "./../compartilhado/formulario.js";
 import { bloquearBotao, desbloquearBotao, validaCamposObrigatorio } from "./../compartilhado/formulario.js";
 import { elementoTabelaAgenda, elementoDialogoAlertasAgenda, elementoBuscaAgenda } from "./elementosAgenda.js";
 import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoEdicao, elementoFormularioAgenda } from "./elementosAgenda.js";
@@ -36,21 +36,20 @@ function iniciarAgenda() {
 function iniciarEdicao() {
     elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
-        ocultarErrosValidacao(elementoAlertaAgenda);
         const dadosFormulario = processaFormulario(elementoFormularioAgenda);
-        console.log(dadosFormulario);
+        const resultadoValidacao = validaFormulario(dadosFormulario);
+        const resultadoDuplicidade = validaDuplicidadeFormulario(dadosFormulario);
         
-        const resultado = validaFormulario(dadosFormulario);
-        resultado.referencia = referencia
-        const formularioEditado = verificaEdicao(resultado);
-        camposValidos = resultado.validacao.contatoValido && !formularioEditado;
-        console.log(resultado);
 
-        exibirErrosValidacao(resultado.validacao, elementoAlertaAgenda);
-        exibirErrosValidacao(resultado.duplicidade, elementoAlertaAgenda);
+        resultadoValidacao.referencia = referencia
+        const formularioEditado = verificaEdicao(resultado);
+        camposValidos = resultadoValidacao.contatoValido && !formularioEditado;
+    
+        exibirErrosValidacao(resultadoValidacao, elementoAlertaAgenda);
+        exibirErrosValidacao(resultadoDuplicidade, elementoAlertaAgenda);
         if (!formularioEditado) {
 
-            if (resultado.validacao.contatoValido) {
+            if (resultadoValidacao.contatoValido) {
                 mensagemContatoAlterado();
 
             };
@@ -81,7 +80,6 @@ function editarContatoAgenda() {
 function validaCamposFormulario() {
 
     elementoFormularioAgenda.formulario.addEventListener('input', () => {
-        ocultarErrosValidacao(elementoAlertaAgenda);
         const resultado = validaCamposObrigatorio(elementoFormularioAgenda.formulario);
 
         desbloquearBotao(resultado.valido, elementoFormularioAgenda);

@@ -1,27 +1,30 @@
 import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
-import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, ocultarErrosValidacao } from "../compartilhado/formulario.js";
+import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, validaDuplicidadeFormulario } from "../compartilhado/formulario.js";
 import { enviarFormulario } from "./cadastroFormulario.js";
 
-let camposValidos = true;
-
+let camposValidos = false ;
 function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        // ocultarErrosValidacao(elementoAlerta);
         const dadosFormulario = processaFormulario(elementoCadastro);
-        const resultado = validaFormulario(dadosFormulario);
-        camposValidos = resultado.validacao.contatoValido;
-
-        exibirErrosValidacao(resultado.validacao, elementoAlerta);
+        const resultadoValidacao = validaFormulario(dadosFormulario);
+        const resultadoDuplicidade = validaDuplicidadeFormulario(dadosFormulario);
+        camposValidos = !resultadoValidacao.contatoValido || !resultadoDuplicidade.contatoValido;
+        console.log(!resultadoValidacao.contatoValido || !resultadoDuplicidade.contatoValido);
         
-        if (resultado.validacao.contatoValido) {
-            enviarFormulario(resultado);
+        if (!resultadoValidacao.contatoValido) {
+            exibirErrosValidacao(resultadoValidacao, elementoAlerta);
+        } else if (!resultadoDuplicidade.contatoValido) {
+            exibirErrosValidacao(resultadoDuplicidade, elementoAlerta);
+        };
+
+        if (resultadoValidacao.contatoValido && resultadoDuplicidade.contatoValido) {
+            enviarFormulario(resultadoValidacao);
             elementoCadastro.formulario.reset();
-        }
+        };
+
     });
-
-
 };
 function sairMensagem() {
     elementoDialogo.botaoFechar.addEventListener("click", () => {
@@ -34,12 +37,13 @@ function validaCamposFormulario() {
     bloquearBotao(elementoBotoes);
     elementoCadastro.formulario.addEventListener('input', () => {
         const resultado = validaCamposObrigatorio(elementoCadastro.formulario);
-
         desbloquearBotao(resultado.valido, elementoBotoes);
-        if (camposValidos) {
-            exibirErrosCampos(resultado.nome, elementoAlerta);
-            exibirErrosCampos(resultado.telefone, elementoAlerta);
-            exibirErrosCampos(resultado.email, elementoAlerta);
+        console.log(camposValidos);
+        console.log(resultado);
+        
+        if (!resultado.valido || !camposValidos) {
+            
+            exibirErrosValidacao(resultado, elementoAlerta);
         };
     });
 };

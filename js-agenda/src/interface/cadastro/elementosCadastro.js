@@ -8,8 +8,6 @@ export const elementoAlerta = {
     sobrenome: document.getElementById('alerta-sobrenome'),
     telefone: document.getElementById('alerta-telefone'),
     email: document.getElementById('alerta-email'),
-    emailExistente: document.getElementById('alerta-email-existente'),
-    telefoneExistente: document.getElementById('alerta-telefone-existente'),
 };
 
 export const elementoDialogo = {

@@ -3,27 +3,31 @@ import { validacaoGeral } from "./compartilhado.js";
 import { validaDuplicidade } from "./validaDuplicidade.js";
 
 export function validaPessoa(pessoa) {
-    const validacao = {};
-    validacao.nome = pessoa.validarNome();
-    validacao.sobrenome = pessoa.validarSobrenome();
-    validacao.telefone = pessoa.contato.validarTelefone();
-    validacao.email = pessoa.contato.validarEmail();
-   
-    if (pessoa.sobrenome.length <= 0) {
 
-        validacao.sobrenome.erro = false;
-        validacao.sobrenome.mensagem = '';
+    const sobrenome = (pessoa) => {
+        if (pessoa.sobrenome.length <= 0) {
+            return {
+                erro: false,
+                mensagem : ''};
+        } else {
+            return pessoa.validarSobrenome();
+        };
+    };
+    const validacao = {
+        nome: pessoa.validarNome(),
+        sobrenome: sobrenome(pessoa),
+        telefone: pessoa.contato.validarTelefone(),
+        email: pessoa.contato.validarEmail()
     };
 
-    validacao.contatoValido = validacaoGeral(validacao);    
+    validacao.contatoValido = validacaoGeral(validacao);
 
     return validacao;
 };
 
 export function verificaDuplicidade(pessoa) {
 
-    const lista = retornaLista();
-    return validaDuplicidade(pessoa, lista);
+    return validaDuplicidade(pessoa, retornaLista());
 };
 
 

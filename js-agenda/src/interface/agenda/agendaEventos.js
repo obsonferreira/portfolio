@@ -38,6 +38,8 @@ function iniciarEdicao() {
         event.preventDefault();
         ocultarErrosValidacao(elementoAlertaAgenda);
         const dadosFormulario = processaFormulario(elementoFormularioAgenda);
+        console.log(dadosFormulario);
+        
         const resultado = validaFormulario(dadosFormulario);
         resultado.referencia = referencia
         const formularioEditado = verificaEdicao(resultado);

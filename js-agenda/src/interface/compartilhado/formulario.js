@@ -7,11 +7,11 @@ import { elementoAlerta } from "../cadastro/elementosCadastro.js";
 
 export function exibirErrosValidacao(validacao, elementoAlerta) {
     console.log(validacao);
-    
+
     for (const chave in validacao) {
-        
-        if (chave !== "valido" || chave !== "contatoValido") {
-            
+        const valorValido = chave === "valido" || chave === "contatoValido";
+        if (!valorValido) {
+
             console.log(chave);
             console.log(validacao[chave]);
             if (validacao[chave]) {
@@ -26,7 +26,7 @@ export function exibirErrosCampos(dados, elementoAlerta) {
     if (dados.erro) {
         exibirAtributo(elementoAlerta[dados.campo]);
         exibirMensagem(elementoAlerta[dados.campo], dados.mensagem);
-    }else{
+    } else {
         ocultarAtributo(elementoAlerta[dados.campo]);
     };
 
@@ -61,6 +61,7 @@ export function validaFormulario(pessoa) {
 export function validaDuplicidadeFormulario(pessoa) {
 
     return verificaDuplicidade(pessoa);
+
 };
 
 export function validaCamposObrigatorio(dadosFormulario) {

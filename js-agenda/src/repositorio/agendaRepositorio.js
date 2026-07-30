@@ -5,9 +5,9 @@ import { agendaRepositorio } from "../modelos/agenda.js";
 
 agendaRepositorio.contatos = carregarContatos();
 
-export function salvarContato(pessoa, validacao) {
+export function salvarContato(pessoa,validacao,duplicidade) {
 
-    if (validacao.contatoValido) {
+    if (validacao && duplicidade) {
 
         agendaRepositorio.adicionar(pessoa);
         localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));

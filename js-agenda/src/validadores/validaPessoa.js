@@ -7,6 +7,8 @@ export function validaPessoa(pessoa) {
     const sobrenome = (pessoa) => {
         if (pessoa.sobrenome.length <= 0) {
             return {
+                campo:"sobrenome",
+                valor:"",
                 erro: false,
                 mensagem : ''};
         } else {

@@ -36,28 +36,24 @@ function iniciarAgenda() {
 function iniciarEdicao() {
     elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
-        const dadosFormulario = processaFormulario(elementoFormularioAgenda);
-        const resultadoValidacao = validaFormulario(dadosFormulario);
-        const resultadoDuplicidade = validaDuplicidadeFormulario(dadosFormulario);
-        
+        const pessoa = processaFormulario(elementoFormularioAgenda);
+        const dadosFormulario = {
+            pessoa: pessoa,
+            validacao: validaFormulario(pessoa),
+            duplicidade: validaDuplicidadeFormulario(pessoa),
+            referencia: referencia
+        };
 
-        resultadoValidacao.referencia = referencia
-        const formularioEditado = verificaEdicao(resultado);
-        camposValidos = resultadoValidacao.contatoValido && !formularioEditado;
-    
-        exibirErrosValidacao(resultadoValidacao, elementoAlertaAgenda);
-        exibirErrosValidacao(resultadoDuplicidade, elementoAlertaAgenda);
-        if (!formularioEditado) {
+        const formularioEditado = verificaEdicao(dadosFormulario.duplicidade);
 
-            if (resultadoValidacao.contatoValido) {
-                mensagemContatoAlterado();
+        camposValidos = dadosFormulario.validacao.contatoValido;
 
-            };
-        } else {
-            if (resultado.validacao.contatoValido && resultado.duplicidade.contatoValido) {
-                editarFormulario(resultado);
-                mensagemContatoAlterado();
-            };
+        exibirErrosValidacao(dadosFormulario.validacao, elementoAlertaAgenda);
+        exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlertaAgenda);
+
+        if (dadosFormulario.validacao.contatoValido && dadosFormulario.duplicidade.contatoValido) {
+            editarFormulario(dadosFormulario);
+            mensagemContatoAlterado();
         };
 
     });

@@ -1,26 +1,28 @@
 import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
 import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, validaDuplicidadeFormulario } from "../compartilhado/formulario.js";
 import { enviarFormulario } from "./cadastroFormulario.js";
+import { Pessoa } from "../../modelos/pessoa.js";
 
-let camposValidos = false ;
+let camposValidos = false;
 function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
+        const pessoa = processaFormulario(elementoCadastro);
+        const dadosFormulario = {
+            pessoa:pessoa,
+            validacao: validaFormulario(pessoa),
+            duplicidade: validaDuplicidadeFormulario(pessoa)
+        };
+        camposValidos = !dadosFormulario.validacao.contatoValido || !dadosFormulario.duplicidade.contatoValido;
 
-        const dadosFormulario = processaFormulario(elementoCadastro);
-        const resultadoValidacao = validaFormulario(dadosFormulario);
-        const resultadoDuplicidade = validaDuplicidadeFormulario(dadosFormulario);
-        camposValidos = !resultadoValidacao.contatoValido || !resultadoDuplicidade.contatoValido;
-        console.log(!resultadoValidacao.contatoValido || !resultadoDuplicidade.contatoValido);
-        
-        if (!resultadoValidacao.contatoValido) {
-            exibirErrosValidacao(resultadoValidacao, elementoAlerta);
-        } else if (!resultadoDuplicidade.contatoValido) {
-            exibirErrosValidacao(resultadoDuplicidade, elementoAlerta);
+        if (!dadosFormulario.validacao.contatoValido) {
+            exibirErrosValidacao(dadosFormulario.validacao, elementoAlerta);
+        } else if (!dadosFormulario.duplicidade.contatoValido) {
+            exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlerta);
         };
 
-        if (resultadoValidacao.contatoValido && resultadoDuplicidade.contatoValido) {
-            enviarFormulario(resultadoValidacao);
+        if (dadosFormulario.validacao.contatoValido && dadosFormulario.duplicidade.contatoValido) {
+            enviarFormulario(dadosFormulario);
             elementoCadastro.formulario.reset();
         };
 
@@ -40,9 +42,9 @@ function validaCamposFormulario() {
         desbloquearBotao(resultado.valido, elementoBotoes);
         console.log(camposValidos);
         console.log(resultado);
-        
+
         if (!resultado.valido || !camposValidos) {
-            
+
             exibirErrosValidacao(resultado, elementoAlerta);
         };
     });

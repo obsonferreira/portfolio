@@ -3,7 +3,7 @@ import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigato
 import { enviarFormulario } from "./cadastroFormulario.js";
 import { Pessoa } from "../../modelos/pessoa.js";
 
-let camposValidos = false;
+let formularioValido = false;
 function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -13,7 +13,7 @@ function iniciarCadastro() {
             validacao: validaFormulario(pessoa),
             duplicidade: validaDuplicidadeFormulario(pessoa)
         };
-        camposValidos = !dadosFormulario.validacao.contatoValido || !dadosFormulario.duplicidade.contatoValido;
+        formularioValido = !dadosFormulario.validacao.contatoValido || !dadosFormulario.duplicidade.contatoValido;
 
         if (!dadosFormulario.validacao.contatoValido) {
             exibirErrosValidacao(dadosFormulario.validacao, elementoAlerta);
@@ -40,10 +40,8 @@ function validaCamposFormulario() {
     elementoCadastro.formulario.addEventListener('input', () => {
         const resultado = validaCamposObrigatorio(elementoCadastro.formulario);
         desbloquearBotao(resultado.valido, elementoBotoes);
-        console.log(camposValidos);
-        console.log(resultado);
 
-        if (!resultado.valido || !camposValidos) {
+        if (!resultado.valido || !formularioValido) {
 
             exibirErrosValidacao(resultado, elementoAlerta);
         };

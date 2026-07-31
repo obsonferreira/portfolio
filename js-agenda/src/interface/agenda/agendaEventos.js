@@ -11,7 +11,7 @@ import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 import { mensagemContatoAlterado } from "../compartilhado/dialog.js";
 
 let referencia;
-let camposValidos = true;
+let formularioValido = true;
 
 function iniciarAgenda() {
     const lista = retornaLista();
@@ -46,7 +46,7 @@ function iniciarEdicao() {
 
         const formularioEditado = verificaEdicao(dadosFormulario.duplicidade);
 
-        camposValidos = dadosFormulario.validacao.contatoValido;
+        formularioValido = dadosFormulario.validacao.contatoValido;
 
         exibirErrosValidacao(dadosFormulario.validacao, elementoAlertaAgenda);
         exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlertaAgenda);
@@ -79,10 +79,8 @@ function validaCamposFormulario() {
         const resultado = validaCamposObrigatorio(elementoFormularioAgenda.formulario);
 
         desbloquearBotao(resultado.valido, elementoFormularioAgenda);
-        if (camposValidos) {
-            exibirErrosCampos(resultado.nome, elementoAlertaAgenda);
-            exibirErrosCampos(resultado.telefone, elementoAlertaAgenda);
-            exibirErrosCampos(resultado.email, elementoAlertaAgenda);
+        if (formularioValido) {
+            exibirErrosValidacao(resultado);
         };
     });
 };

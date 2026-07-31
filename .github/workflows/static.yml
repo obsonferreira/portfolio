@@ -36,8 +36,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: 'js-cpf-senha-tools/web','js-api-busca-cep','js-cpf-senha-tools/web','js-agenda'
+          # Publica todos os projetos enquanto eles compartilham este repositorio.
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

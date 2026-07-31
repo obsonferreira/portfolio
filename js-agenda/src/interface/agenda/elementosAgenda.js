@@ -8,19 +8,19 @@ export const elementoAlertaAgenda = {
 };
 
 export const elementoDialogoEdicao = {
-    modalEdicao: document.getElementById("modal-edicao"),
+    modalEdicao: document.getElementById("caixa-edicao"),
     botaoExcluir: document.getElementById("btn-excluir"),
     botaoSair: document.getElementById("btn-sair")
 
 };
 
 export const elementoFormularioAgenda = {
-    formulario: document.getElementById("formulario-modal"),
-    submit: document.getElementById("salvar-form")
+    formulario: document.getElementById("formulario-edicao"),
+    submit: document.getElementById("salvar-edicao")
 };
 
 export const elementoDialogoAlertasAgenda = {
-    modalAlertas: document.getElementById("modal-alertas"),
+    modalAlertas: document.getElementById("caixa-alertas"),
     botaoSim: document.getElementById("btn-sim"),
     botaoNao: document.getElementById("btn-nao"),
     botaoSairAlteracao: document.getElementById("btn-sair-alteracao"),
@@ -39,5 +39,7 @@ export const elementoBuscaAgenda = {
 
 export const elementoTabelaAgenda = {
     tabela: document.getElementById("tabela-agenda"),
-    cabecalho: document.getElementById('cabecalho')
+    
 };
+
+// cabecalho: document.getElementById('cabecalho')

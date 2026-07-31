@@ -26,7 +26,7 @@
         <div id="busca-contato">
 
             <input id="input-busca" placeholder="digite os dados para busca">
-            <button id="botao-busca">Buscar</button>
+            <button id="botao-busca" type="button">Buscar</button>
 
         </div>
 
@@ -54,8 +54,8 @@
     </div>
     <div class="dialog-contato">
 
-        <dialog id="modal-edicao">
-            <form id="formulario-modal">
+        <dialog id="caixa-edicao">
+            <form id="formulario-edicao">
                 <div id="dados-pessoais">
                     <div id="campo-nome">
                         <label for="nome">Nome</label>
@@ -88,27 +88,27 @@
                 </div>
                 <div id="botao-form">
 
-                    <button id="salvar-form" type="submit">Salvar</button>
+                    <button id="salvar-edicao" type="submit">Salvar</button>
 
                 </div>
 
             </form>
 
-            <button id="btn-excluir" type="submit">Excluir</button>
-            <button id="btn-sair" type="submit">Sair</button>
+            <button id="btn-excluir" type="button">Excluir</button>
+            <button id="btn-sair" type="button">Sair</button>
         </dialog>
 
-        <dialog id="modal-alertas">
+        <dialog id="caixa-alertas">
             <div id="container-exclusao" hidden>
                 <span id="alerta-exclusao">Deseja realmente excluir o contato?</span>
-                <button id="btn-sim">Sim</button>
-                <button id="btn-nao">Não</button>
+                <button id="btn-sim" type="button">Sim</button>
+                <button id="btn-nao" type="button">Não</button>
             </div>
 
             <div id="container-alteracao" hidden>
 
                 <span id="alerta-alteracao">Dados alterado com sucesso!</span>
-                <button id="btn-sair-alteracao">Sair</button>
+                <button id="btn-sair-alteracao" type="button">Sair</button>
 
             </div>
 

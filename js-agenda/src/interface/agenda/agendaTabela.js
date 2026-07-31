@@ -1,6 +1,5 @@
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 import { elementoDialogoEdicao, elementoTabelaAgenda } from "./elementosAgenda.js";
-import { criarBotaoEditar } from "../compartilhado/dom.js";
 
 export function preencheFormulario(formulario, dadosBusca) {
     const dados = buscaContato(dadosBusca);
@@ -68,4 +67,15 @@ export function retornaDadosTabela(elemento) {
             email: valorCelula[3]
         }
     };
+};
+
+export function criarBotaoEditar(pessoa) {
+
+    const td = document.createElement('td');
+    const botao = document.createElement("button");
+    botao.classList.add("btn-editar");
+    botao.textContent = "Editar";
+    botao.dataset.pessoa = pessoa;
+    td.appendChild(botao);
+    return td;
 };

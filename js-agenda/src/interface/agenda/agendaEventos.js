@@ -6,7 +6,7 @@ import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoEdicao, eleme
 import { editarFormulario, verificaEdicao } from "./agendaFormulario.js";
 import { deletarContato, retornaLista } from "../../repositorio/agendaRepositorio.js";
 import { preencheFormulario, criarTabelaContato, retornaDadosTabela } from "./agendaTabela.js";
-import { alertaBuscaContato } from "../compartilhado/dom.js";
+import { alertaBuscaContato } from "./agendaBusca.js";
 import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 import { mensagemContatoAlterado } from "../compartilhado/dialog.js";
 

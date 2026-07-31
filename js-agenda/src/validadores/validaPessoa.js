@@ -22,7 +22,7 @@ export function validaPessoa(pessoa) {
         email: pessoa.contato.validarEmail()
     };
 
-    validacao.contatoValido = validacaoGeral(validacao);
+    validacao.dadosInvalidos = validacaoGeral(validacao);
 
     return validacao;
 };

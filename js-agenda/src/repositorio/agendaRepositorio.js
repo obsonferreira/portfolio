@@ -16,7 +16,7 @@ export function salvarContato(pessoa,validacao,duplicidade) {
 
 export function editarContato(dados, validacao, parametro,duplicidade) {
 
-    if (validacao.contatoValido && duplicidade.contatoValido) {
+    if (!validacao.dadosInvalidos && !duplicidade.dadosInvalidos) {
         agendaRepositorio.atualizar(dados, parametro);
         localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
     };

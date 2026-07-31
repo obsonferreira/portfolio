@@ -6,29 +6,30 @@ import { validacaoGeral } from './../../validadores/compartilhado.js';
 import { elementoAlerta } from "../cadastro/elementosCadastro.js";
 
 export function exibirErrosValidacao(validacao, elementoAlerta) {
-    console.log(validacao);
 
     for (const chave in validacao) {
-        const valorValido = chave === "valido" || chave === "contatoValido";
-        if (!valorValido) {
-
-            console.log(chave);
-            console.log(validacao[chave]);
-            if (validacao[chave]) {
+        const valorInvalido = (chave === "dadosInvalidos") ;
+        if (!valorInvalido) {
+            if (validacao[chave].erro) {
                 exibirErrosCampos(validacao[chave], elementoAlerta);
             };
         };
+    };
+};
+export function ocultaErrosValidacao(elementoAlerta) {
 
+    for (const chave in elementoAlerta) {
+
+        if (elementoAlerta[chave]) {
+            ocultarAtributo(elementoAlerta[chave]);
+        };
     };
 };
 
 export function exibirErrosCampos(dados, elementoAlerta) {
-    if (dados.erro) {
-        exibirAtributo(elementoAlerta[dados.campo]);
-        exibirMensagem(elementoAlerta[dados.campo], dados.mensagem);
-    } else {
-        ocultarAtributo(elementoAlerta[dados.campo]);
-    };
+
+    exibirAtributo(elementoAlerta[dados.campo]);
+    exibirMensagem(elementoAlerta[dados.campo], dados.mensagem);
 
 };
 
@@ -66,13 +67,11 @@ export function validaDuplicidadeFormulario(pessoa) {
 
 export function validaCamposObrigatorio(dadosFormulario) {
 
-    const resultado = {
+    const dados = {
         nome: validaEntrada(dadosFormulario['nome']),
         telefone: validaEntrada(dadosFormulario['telefone']),
         email: validaEntrada(dadosFormulario['email'])
     };
-    const validacao = validacaoGeral(resultado);
-    resultado.valido = validacao;
-
-    return resultado;
+    dados.dadosInvalidos = validacaoGeral(dados);
+    return dados;
 };

@@ -11,7 +11,6 @@ import { buscaContato } from "../../repositorio/agendaRepositorio.js";
 import { mensagemContatoAlterado } from "../compartilhado/dialog.js";
 
 let referencia;
-let formularioValido = true;
 
 function iniciarAgenda() {
     const lista = retornaLista();
@@ -37,6 +36,7 @@ function iniciarEdicao() {
     elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
         const pessoa = processaFormulario(elementoFormularioAgenda);
+        
         const dadosFormulario = {
             pessoa: pessoa,
             validacao: validaFormulario(pessoa),
@@ -44,18 +44,20 @@ function iniciarEdicao() {
             referencia: referencia
         };
 
-        const formularioEditado = verificaEdicao(dadosFormulario.duplicidade);
+        const formularioEditado = verificaEdicao(dadosFormulario);
+        
+        if (dadosFormulario.validacao.dadosInvalidos) {
+            exibirErrosValidacao(dadosFormulario.validacao, elementoAlertaAgenda);
+        } else if (dadosFormulario.duplicidade.dadosInvalidos) {
+            exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlertaAgenda);
+        } else {
+            ocultaErrosValidacao(elementoAlertaAgenda);
+        };
 
-        formularioValido = dadosFormulario.validacao.contatoValido;
-
-        exibirErrosValidacao(dadosFormulario.validacao, elementoAlertaAgenda);
-        exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlertaAgenda);
-
-        if (dadosFormulario.validacao.contatoValido && dadosFormulario.duplicidade.contatoValido) {
+        if (!dadosFormulario.validacao.dadosInvalidos && !dadosFormulario.duplicidade.dadosInvalidos) {
             editarFormulario(dadosFormulario);
             mensagemContatoAlterado();
         };
-
     });
 };
 
@@ -76,12 +78,15 @@ function editarContatoAgenda() {
 function validaCamposFormulario() {
 
     elementoFormularioAgenda.formulario.addEventListener('input', () => {
-        const resultado = validaCamposObrigatorio(elementoFormularioAgenda.formulario);
+        const campos = validaCamposObrigatorio(elementoFormularioAgenda.formulario);
 
-        desbloquearBotao(resultado.valido, elementoFormularioAgenda);
-        if (formularioValido) {
-            exibirErrosValidacao(resultado);
+        desbloquearBotao(!campos.dadosInvalidos, elementoFormularioAgenda);
+        if (campos.dadosInvalidos) {
+            exibirErrosValidacao(campos, elementoAlertaAgenda);
+        } else {
+            ocultaErrosValidacao(elementoAlertaAgenda);
         };
+
     });
 };
 

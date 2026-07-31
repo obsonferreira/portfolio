@@ -17,13 +17,15 @@ export function verificaEdicao(dados) {
         if (chave !== 'contatoValido') {
             if (dados.duplicidade[chave].id === dados.referencia) {
                 console.log(dados.duplicidade[chave].id);
-                resultado.chave = { campo: chave, valor: dados.duplicidade }
+                resultado[chave] = { campo: chave, valor: dados.duplicidade }
 
                 contador++;
             }
         }
 
     };
+    console.log(resultado);
+    
 
     return contador !== 4;
 };

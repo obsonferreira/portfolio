@@ -1,27 +1,28 @@
 import { elementoAlerta, elementoBotoes, elementoCadastro, elementoDialogo } from "./elementosCadastro.js";
-import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, validaDuplicidadeFormulario } from "../compartilhado/formulario.js";
+import { validaFormulario, bloquearBotao, desbloquearBotao, validaCamposObrigatorio, processaFormulario, exibirErrosCampos, exibirErrosValidacao, validaDuplicidadeFormulario, ocultaErrosValidacao } from "../compartilhado/formulario.js";
 import { enviarFormulario } from "./cadastroFormulario.js";
 import { Pessoa } from "../../modelos/pessoa.js";
 
-let formularioValido = false;
+
 function iniciarCadastro() {
     elementoCadastro.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
         const pessoa = processaFormulario(elementoCadastro);
         const dadosFormulario = {
-            pessoa:pessoa,
+            pessoa: pessoa,
             validacao: validaFormulario(pessoa),
             duplicidade: validaDuplicidadeFormulario(pessoa)
         };
-        formularioValido = !dadosFormulario.validacao.contatoValido || !dadosFormulario.duplicidade.contatoValido;
 
-        if (!dadosFormulario.validacao.contatoValido) {
+        if (dadosFormulario.validacao.dadosInvalidos) {
             exibirErrosValidacao(dadosFormulario.validacao, elementoAlerta);
-        } else if (!dadosFormulario.duplicidade.contatoValido) {
+        } else if (dadosFormulario.duplicidade.dadosInvalidos) {
             exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlerta);
+        } else {
+            ocultaErrosValidacao(elementoAlerta);
         };
 
-        if (dadosFormulario.validacao.contatoValido && dadosFormulario.duplicidade.contatoValido) {
+        if (!dadosFormulario.validacao.dadosInvalidos && !dadosFormulario.duplicidade.dadosInvalidos) {
             enviarFormulario(dadosFormulario);
             elementoCadastro.formulario.reset();
         };
@@ -38,13 +39,14 @@ function validaCamposFormulario() {
 
     bloquearBotao(elementoBotoes);
     elementoCadastro.formulario.addEventListener('input', () => {
-        const resultado = validaCamposObrigatorio(elementoCadastro.formulario);
-        desbloquearBotao(resultado.valido, elementoBotoes);
-
-        if (!resultado.valido || !formularioValido) {
-
-            exibirErrosValidacao(resultado, elementoAlerta);
+        const campos = validaCamposObrigatorio(elementoCadastro.formulario);
+        desbloquearBotao(!campos.dadosInvalidos, elementoBotoes);
+        if (campos.dadosInvalidos) {
+            exibirErrosValidacao(campos, elementoAlerta);
+        } else {
+            ocultaErrosValidacao(elementoAlerta);
         };
+
     });
 };
 

@@ -10,8 +10,8 @@ export function validacaoGeral(validacao) {
     };
 
     if (contaErros > 0) {
-        return false;
-    } else {
         return true;
+    } else {
+        return false;
     };
 };

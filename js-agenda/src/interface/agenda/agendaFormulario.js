@@ -1,31 +1,27 @@
 import { editarContato } from "../../repositorio/agendaRepositorio.js";
+import { validacaoGeral } from "../../validadores/compartilhado.js";
 
 export function editarFormulario(dados) {
     console.log(dados);
 
-    editarContato(dados.pessoa, dados.validacao, dados.referencia, dados.duplicidade);
+    editarContato(dados.pessoa, dados.referencia);
 
 };
 
-export function verificaEdicao(dados) {
-    console.log(dados);
+export function verificaEdicao(dados,referencia) {
 
-    let contador = 0;
     const resultado = {};
-
-    for (const chave in dados.duplicidade) {
-        if (chave !== 'contatoValido') {
-            if (dados.duplicidade[chave].id === dados.referencia) {
-                console.log(dados.duplicidade[chave].id);
-                resultado[chave] = { campo: chave, valor: dados.duplicidade }
-
-                contador++;
-            }
-        }
+    for (const chave in dados.contato) {
+        console.log(dados.contato[chave]);
+        
+        
+        if (dados.contato[chave] === referencia) {
+            resultado[chave] = { campo: chave, valor: dados.contato[chave], erro: false, mensagem: "" }
+            };
 
     };
-    console.log(resultado);
     
+    resultado.caposEditados = validacaoGeral(resultado)
 
-    return contador !== 4;
+    return resultado;
 };

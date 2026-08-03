@@ -1,5 +1,5 @@
 import { ocultarAtributo, exibirAtributo, exibirMensagem } from "./../compartilhado/notificacoes.js";
-import { exibirErrosCampos, exibirErrosValidacao, processaFormulario, validaDuplicidadeFormulario, validaFormulario } from "./../compartilhado/formulario.js";
+import { exibirErrosCampos, exibirErrosValidacao, ocultaErrosValidacao, processaFormulario, validaDuplicidadeFormulario, validaFormulario } from "./../compartilhado/formulario.js";
 import { bloquearBotao, desbloquearBotao, validaCamposObrigatorio } from "./../compartilhado/formulario.js";
 import { elementoTabelaAgenda, elementoDialogoAlertasAgenda, elementoBuscaAgenda } from "./elementosAgenda.js";
 import { elementoVisorAgenda, elementoAlertaAgenda, elementoDialogoEdicao, elementoFormularioAgenda } from "./elementosAgenda.js";
@@ -36,25 +36,30 @@ function iniciarEdicao() {
     elementoFormularioAgenda.formulario.addEventListener("submit", (event) => {
         event.preventDefault();
         const pessoa = processaFormulario(elementoFormularioAgenda);
+        console.log(pessoa);
         
+        const formularioEditado = verificaEdicao(pessoa,referencia);
+        const duplicidade = validaDuplicidadeFormulario(pessoa)
         const dadosFormulario = {
             pessoa: pessoa,
             validacao: validaFormulario(pessoa),
-            duplicidade: validaDuplicidadeFormulario(pessoa),
+            duplicidade: duplicidade,
             referencia: referencia
         };
 
-        const formularioEditado = verificaEdicao(dadosFormulario);
-        
+
+        console.log(formularioEditado);
+
+
         if (dadosFormulario.validacao.dadosInvalidos) {
             exibirErrosValidacao(dadosFormulario.validacao, elementoAlertaAgenda);
-        } else if (dadosFormulario.duplicidade.dadosInvalidos) {
+        } else if (dadosFormulario.duplicidade.dadosInvalidos && formularioEditado.caposEditados) {
             exibirErrosValidacao(dadosFormulario.duplicidade, elementoAlertaAgenda);
         } else {
             ocultaErrosValidacao(elementoAlertaAgenda);
         };
 
-        if (!dadosFormulario.validacao.dadosInvalidos && !dadosFormulario.duplicidade.dadosInvalidos) {
+        if (!dadosFormulario.validacao.dadosInvalidos && (!dadosFormulario.duplicidade.dadosInvalidos || formularioEditado.caposEditados)) {
             editarFormulario(dadosFormulario);
             mensagemContatoAlterado();
         };

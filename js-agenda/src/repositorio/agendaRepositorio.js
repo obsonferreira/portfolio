@@ -1,30 +1,18 @@
-// aqui vou salvar contatos, carregar contatos, listar contatos
-// atualizar contatos e remover contatos
-
 import { agendaRepositorio } from "../modelos/agenda.js";
 
 agendaRepositorio.contatos = carregarContatos();
 
-export function salvarContato(pessoa,validacao,duplicidade) {
-
-    if (validacao && duplicidade) {
-
-        agendaRepositorio.adicionar(pessoa);
-        localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
-    };
+export function salvarContato(pessoa) {
+    agendaRepositorio.adicionar(pessoa);
+    localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
 };
 
-export function editarContato(dados, validacao, parametro,duplicidade) {
-
-    if (!validacao.dadosInvalidos && !duplicidade.dadosInvalidos) {
-        agendaRepositorio.atualizar(dados, parametro);
-        localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
-    };
-
+export function editarContato(dados, parametro) {
+    agendaRepositorio.atualizar(dados, parametro);
+    localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
 };
 
 export function deletarContato(referencia) {
-
     agendaRepositorio.excluir(referencia);
     localStorage.setItem('contatos', JSON.stringify(agendaRepositorio.contatos));
 };

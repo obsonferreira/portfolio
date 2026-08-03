@@ -16,6 +16,7 @@ export function exibirErrosValidacao(validacao, elementoAlerta) {
         };
     };
 };
+
 export function ocultaErrosValidacao(elementoAlerta) {
 
     for (const chave in elementoAlerta) {
